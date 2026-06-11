@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brûlerie Saint-Cyr — Café de spécialité</title>
+<style>
+  :root{--bg:#faf6f0;--ink:#2b211a;--muted:#7a6c5d;--acc:#b5552d;--acc2:#d98b4a;--card:#fff;--line:#e7ddd0}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:Georgia,'Times New Roman',serif}
+  nav{position:sticky;top:0;z-index:40;background:rgba(250,246,240,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{font-family:Georgia,serif;font-size:22px;font-weight:700;letter-spacing:.5px;display:flex;align-items:center;gap:10px}
+  .bean{width:24px;height:24px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:linear-gradient(135deg,var(--acc),#7a3a1c);position:relative;transform:rotate(20deg)}
+  .bean::after{content:"";position:absolute;inset:0;border-left:2px solid #faf6f0aa;border-radius:inherit;transform:rotate(0)}
+  .links{display:flex;gap:30px;color:var(--muted);font-size:15px}
+  .links a{transition:.2s}.links a:hover{color:var(--acc)}
+  .btn{background:var(--acc);color:#fff;padding:12px 22px;border-radius:100px;font-weight:600;font-size:14px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px #b5552d40}
+  /* hero */
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:70px 0 50px}
+  .eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:12px;color:var(--acc);font-weight:700;margin-bottom:18px}
+  .hero h1{font-size:60px;line-height:1.06;letter-spacing:-1px}
+  .hero p{color:var(--muted);font-size:18px;line-height:1.7;margin:22px 0 30px;max-width:460px}
+  .hero .cta{display:flex;gap:14px;align-items:center}
+  .link-ar{color:var(--acc);font-weight:600;font-size:15px}
+  .heroimg{height:440px;border-radius:24px;background:
+     radial-gradient(circle at 30% 30%,#e9b787,transparent 55%),
+     linear-gradient(135deg,#7a3a1c,#b5552d 60%,#d98b4a);
+     position:relative;overflow:hidden;box-shadow:0 30px 70px #7a3a1c30}
+  .heroimg::after{content:"☕";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:120px;opacity:.9}
+  .steam{position:absolute;top:80px;left:50%;width:8px;height:60px;background:#ffffff55;border-radius:10px;filter:blur(4px);animation:steam 3s infinite}
+  @keyframes steam{0%{transform:translateY(10px) scaleY(.6);opacity:0}40%{opacity:.7}100%{transform:translateY(-40px) scaleY(1.3);opacity:0}}
+  /* values */
+  .vals{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:30px 0 70px}
+  .vcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;transition:transform .25s}
+  .vcard:hover{transform:translateY(-6px)}
+  .vic{font-size:30px;margin-bottom:12px}
+  .vcard h3{font-size:19px;margin-bottom:8px}
+  .vcard p{color:var(--muted);font-size:15px;line-height:1.6}
+  /* menu */
+  section.menu{padding:60px 0}
+  .center{text-align:center}
+  .h2{font-size:42px;letter-spacing:-1px}
+  .lead{color:var(--muted);font-size:17px;margin:14px auto 44px;max-width:480px}
+  .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px 50px;max-width:840px;margin:0 auto}
+  .mrow{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:16px 0;border-bottom:1px dashed var(--line)}
+  .mrow .nm{font-weight:700;font-family:Georgia,serif;font-size:17px}
+  .mrow .ds{color:var(--muted);font-size:13px;display:block;margin-top:3px;font-family:'Segoe UI',sans-serif}
+  .mrow .pr{color:var(--acc);font-weight:700;white-space:nowrap}
+  /* band */
+  .band{margin:80px 0 0;background:linear-gradient(120deg,#7a3a1c,#b5552d);color:#fff;border-radius:26px;padding:60px;text-align:center}
+  .band h2{font-size:40px;letter-spacing:-1px}
+  .band p{margin:16px 0 28px;opacity:.92;font-size:17px}
+  .band .btn{background:#fff;color:var(--acc)}
+  .hours{display:flex;justify-content:center;gap:40px;margin-top:26px;color:#fff;opacity:.9;font-size:14px;flex-wrap:wrap}
+  footer{padding:40px 0;color:var(--muted);font-size:14px;text-align:center}
+  .fnote{margin-top:8px;font-size:12px;opacity:.7}
+  @media(max-width:860px){.hero{grid-template-columns:1fr}.heroimg{height:300px}.hero h1{font-size:42px}
+    .links{display:none}.vals{grid-template-columns:1fr}.mgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav">
+  <div class="logo"><span class="bean"></span>Brûlerie Saint-Cyr</div>
+  <div class="links"><a href="#">Notre café</a><a href="#menu">Carte</a><a href="#">Torréfaction</a><a href="#">Boutique</a></div>
+  <button class="btn">Réserver une table</button>
+</div></nav>
+
+<header class="wrap hero">
+  <div>
+    <div class="eyebrow">Torréfacteur artisanal depuis 2019</div>
+    <h1>Le café, comme un rituel du matin.</h1>
+    <p>Des grains sélectionnés à la main, torréfiés sur place chaque semaine. Une tasse honnête, dans un lieu fait pour s'attarder.</p>
+    <div class="cta"><button class="btn">Voir la carte</button><a class="link-ar" href="#">Nos cafés en boutique →</a></div>
+  </div>
+  <div class="heroimg"><span class="steam"></span></div>
+</header>
+
+<div class="wrap vals">
+  <div class="vcard"><div class="vic">🌱</div><h3>Origine tracée</h3><p>Chaque lot est sourcé directement auprès de petits producteurs, au juste prix.</p></div>
+  <div class="vcard"><div class="vic">🔥</div><h3>Torréfié sur place</h3><p>Nous torréfions en petites quantités pour une fraîcheur que vous sentez dès la première gorgée.</p></div>
+  <div class="vcard"><div class="vic">🤝</div><h3>Un lieu à vivre</h3><p>Wifi, grandes tables, lumière douce. Restez le temps qu'il vous faut.</p></div>
+</div>
+
+<section class="menu" id="menu"><div class="wrap">
+  <div class="center"><h2 class="h2">La carte</h2><p class="lead">Préparés à la commande par nos baristas.</p></div>
+  <div class="mgrid">
+    <div class="mrow"><div><span class="nm">Espresso</span><span class="ds">Single origine du mois</span></div><span class="pr">2,80 €</span></div>
+    <div class="mrow"><div><span class="nm">Flat white</span><span class="ds">Double ristretto, lait micro-moussé</span></div><span class="pr">4,20 €</span></div>
+    <div class="mrow"><div><span class="nm">Filtre V60</span><span class="ds">Extraction lente, servi en carafe</span></div><span class="pr">4,80 €</span></div>
+    <div class="mrow"><div><span class="nm">Cappuccino</span><span class="ds">Équilibré, mousse onctueuse</span></div><span class="pr">3,80 €</span></div>
+    <div class="mrow"><div><span class="nm">Cold brew</span><span class="ds">Infusé 18 h à froid</span></div><span class="pr">4,50 €</span></div>
+    <div class="mrow"><div><span class="nm">Chocolat chaud maison</span><span class="ds">Chocolat noir 70 %</span></div><span class="pr">4,00 €</span></div>
+    <div class="mrow"><div><span class="nm">Cookie noisette</span><span class="ds">Fait maison, du jour</span></div><span class="pr">3,20 €</span></div>
+    <div class="mrow"><div><span class="nm">Banana bread</span><span class="ds">Tranche généreuse</span></div><span class="pr">3,90 €</span></div>
+  </div>
+
+  <div class="band">
+    <h2>Passez nous voir.</h2>
+    <p>12 rue des Tilleuls — un quartier qui sent bon le café fraîchement moulu.</p>
+    <button class="btn">Réserver une table</button>
+    <div class="hours"><span>Lun–Ven · 7 h 30 – 19 h</span><span>Sam · 8 h – 19 h</span><span>Dim · 9 h – 17 h</span></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="logo" style="justify-content:center;margin-bottom:6px"><span class="bean"></span>Brûlerie Saint-Cyr</div>
+  © 2026 Brûlerie Saint-Cyr — Café de spécialité.
+  <div class="fnote">Site de démonstration fictif créé pour un portfolio. Marque, adresse et coordonnées inventées.</div>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kintora — Ton coach fitness dans la poche</title>
+<style>
+  :root{--bg:#0f1410;--ink:#eafff2;--muted:#9fb3a6;--acc:#34e89e;--acc2:#0ba98a;--card:#16201a;--line:#243029;--dark:#0a0d0b}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:40;background:rgba(15,20,16,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{font-weight:800;font-size:21px;display:flex;align-items:center;gap:9px;letter-spacing:-.5px}
+  .mk{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:flex;align-items:center;justify-content:center;color:#06231a;font-weight:900;font-size:15px}
+  .links{display:flex;gap:30px;color:var(--muted);font-size:15px}
+  .links a:hover{color:var(--ink)}
+  .btn{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#06231a;padding:12px 22px;border-radius:100px;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px #34e89e40}
+  .btn-g{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  /* hero */
+  .hero{display:grid;grid-template-columns:1fr .85fr;gap:30px;align-items:center;padding:70px 0 40px;position:relative}
+  .glow{position:absolute;top:-80px;right:-40px;width:560px;height:520px;background:radial-gradient(circle,#34e89e30,transparent 60%);filter:blur(50px);z-index:-1}
+  .eyebrow{display:inline-flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);padding:7px 14px;border-radius:100px;font-size:13px;color:var(--acc);font-weight:600;margin-bottom:22px}
+  h1{font-size:60px;line-height:1.04;letter-spacing:-2px;font-weight:800}
+  h1 .g{background:linear-gradient(120deg,var(--acc),#7af0c0);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--muted);font-size:18px;line-height:1.65;margin:22px 0 30px;max-width:440px}
+  .cta{display:flex;gap:13px}
+  .stat{display:flex;gap:34px;margin-top:38px}
+  .stat .n{font-size:28px;font-weight:800}.stat .l{color:var(--muted);font-size:13px}
+  /* phone */
+  .phonewrap{display:flex;justify-content:center;position:relative}
+  .phone{width:280px;height:570px;background:var(--dark);border:11px solid #050706;border-radius:42px;box-shadow:0 40px 90px #00000080;overflow:hidden;position:relative;animation:floatp 6s ease-in-out infinite}
+  @keyframes floatp{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:24px;background:#050706;border-radius:0 0 16px 16px;z-index:5}
+  .screen{height:100%;background:linear-gradient(180deg,#101a14,#0c120e);padding:34px 16px 16px}
+  .ph-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+  .ph-top .hi{font-size:13px;color:var(--muted)}.ph-top .nm{font-weight:800;font-size:17px}
+  .av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+  .ring{width:150px;height:150px;margin:6px auto 14px;position:relative}
+  .ring svg{transform:rotate(-90deg)}
+  .ringtxt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .ringtxt .b{font-size:30px;font-weight:800}.ringtxt .s{font-size:11px;color:var(--muted)}
+  .prog{stroke-dasharray:408;stroke-dashoffset:408;animation:fill 2.6s ease forwards .5s}
+  @keyframes fill{to{stroke-dashoffset:110}}
+  .cards{display:flex;flex-direction:column;gap:9px}
+  .wo{background:#16201a;border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;align-items:center;gap:11px}
+  .wo .ic{width:36px;height:36px;border-radius:10px;background:#34e89e22;display:flex;align-items:center;justify-content:center;font-size:17px}
+  .wo .t{font-weight:700;font-size:14px}.wo .d{font-size:11px;color:var(--muted)}
+  .wo .go{margin-left:auto;color:var(--acc);font-weight:800}
+  /* feats */
+  section{padding:70px 0}
+  .h2{text-align:center;font-size:42px;font-weight:800;letter-spacing:-1px}
+  .lead{text-align:center;color:var(--muted);font-size:17px;margin:14px auto 46px;max-width:500px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .f{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:transform .25s,border-color .25s}
+  .f:hover{transform:translateY(-6px);border-color:var(--acc)}
+  .f .ic{width:46px;height:46px;border-radius:12px;background:#34e89e1a;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+  .f h3{font-size:18px;margin-bottom:8px}.f p{color:var(--muted);font-size:15px;line-height:1.6}
+  /* pricing */
+  .price{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:920px;margin:0 auto}
+  .pl{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px;text-align:center}
+  .pl.pop{border-color:var(--acc);box-shadow:0 0 0 3px #34e89e22;position:relative}
+  .pl.pop::before{content:"Le plus choisi";position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--acc);color:#06231a;font-size:11px;font-weight:800;padding:4px 12px;border-radius:100px}
+  .pl .pn{font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-size:13px}
+  .pl .pp{font-size:40px;font-weight:800;margin:10px 0}.pl .pp small{font-size:14px;color:var(--muted);font-weight:500}
+  .pl ul{list-style:none;text-align:left;margin:18px 0 22px;display:flex;flex-direction:column;gap:9px}
+  .pl li{color:var(--muted);font-size:14px;display:flex;gap:8px}.pl li::before{content:"✓";color:var(--acc);font-weight:800}
+  .pl .btn{width:100%}
+  .band{margin-top:30px;background:linear-gradient(120deg,var(--acc),var(--acc2));color:#06231a;border-radius:24px;padding:56px;text-align:center}
+  .band h2{font-size:38px;font-weight:800;letter-spacing:-1px}.band p{margin:14px 0 26px;font-weight:500}
+  .band .btn{background:#06231a;color:var(--acc)}
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:14px}
+  .fnote{margin-top:8px;font-size:12px;opacity:.65}
+  @media(max-width:880px){.hero{grid-template-columns:1fr}h1{font-size:42px}.links{display:none}
+    .grid,.price{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav">
+  <div class="logo"><span class="mk">K</span>Kintora</div>
+  <div class="links"><a href="#feat">Fonctions</a><a href="#">Programmes</a><a href="#price">Tarifs</a><a href="#">Blog</a></div>
+  <div style="display:flex;gap:10px"><button class="btn btn-g">Connexion</button><button class="btn">Télécharger</button></div>
+</div></nav>
+
+<header class="wrap hero">
+  <div class="glow"></div>
+  <div>
+    <span class="eyebrow">● Nouveau · plans générés par IA</span>
+    <h1>Ton coach fitness <span class="g">dans la poche</span></h1>
+    <p>Des séances sur mesure qui s'adaptent à ta forme du jour. Suis tes progrès, garde le rythme, atteins tes objectifs — sans salle obligatoire.</p>
+    <div class="cta"><button class="btn">Essayer 7 jours gratuits</button><button class="btn btn-g">Voir comment ça marche</button></div>
+    <div class="stat">
+      <div><div class="n">120 k+</div><div class="l">membres actifs</div></div>
+      <div><div class="n">4,9 ★</div><div class="l">sur l'App Store</div></div>
+      <div><div class="n">800+</div><div class="l">séances</div></div>
+    </div>
+  </div>
+  <div class="phonewrap">
+    <div class="phone"><div class="notch"></div><div class="screen">
+      <div class="ph-top"><div><div class="hi">Bonjour 👋</div><div class="nm">Léa</div></div><div class="av"></div></div>
+      <div class="ring">
+        <svg width="150" height="150" viewBox="0 0 150 150">
+          <circle cx="75" cy="75" r="65" fill="none" stroke="#243029" stroke-width="12"/>
+          <circle class="prog" cx="75" cy="75" r="65" fill="none" stroke="#34e89e" stroke-width="12" stroke-linecap="round"/>
+        </svg>
+        <div class="ringtxt"><div class="b">73%</div><div class="s">objectif du jour</div></div>
+      </div>
+      <div class="cards">
+        <div class="wo"><span class="ic">🏃</span><div><div class="t">Cardio HIIT</div><div class="d">20 min · brûle 240 kcal</div></div><span class="go">▶</span></div>
+        <div class="wo"><span class="ic">💪</span><div><div class="t">Haut du corps</div><div class="d">35 min · niveau intermédiaire</div></div><span class="go">▶</span></div>
+        <div class="wo"><span class="ic">🧘</span><div><div class="t">Mobilité & étirements</div><div class="d">12 min · récupération</div></div><span class="go">▶</span></div>
+      </div>
+    </div></div>
+  </div>
+</header>
+
+<section id="feat"><div class="wrap">
+  <h2 class="h2">Pensée pour durer</h2>
+  <p class="lead">Pas de programme rigide. Kintora s'ajuste à ton niveau, ton temps et ton énergie.</p>
+  <div class="grid">
+    <div class="f"><div class="ic">🤖</div><h3>Plans adaptatifs</h3><p>Chaque semaine, ton programme se recalibre selon tes performances réelles.</p></div>
+    <div class="f"><div class="ic">📈</div><h3>Suivi clair</h3><p>Poids, séries, séances : visualise tes progrès sans te noyer dans les chiffres.</p></div>
+    <div class="f"><div class="ic">🎥</div><h3>Vidéos guidées</h3><p>Chaque exercice est filmé sous deux angles, avec les bons repères de posture.</p></div>
+    <div class="f"><div class="ic">🔔</div><h3>Rappels malins</h3><p>Des notifications qui motivent sans harceler. Tu gardes le contrôle.</p></div>
+    <div class="f"><div class="ic">🥗</div><h3>Côté nutrition</h3><p>Des idées de repas simples, calées sur ton objectif et tes goûts.</p></div>
+    <div class="f"><div class="ic">👥</div><h3>Communauté</h3><p>Des défis hebdo et un fil d'entraide pour ne pas lâcher en chemin.</p></div>
+  </div>
+</div></section>
+
+<section id="price"><div class="wrap">
+  <h2 class="h2">Des tarifs simples</h2>
+  <p class="lead">Commence gratuitement. Change ou résilie quand tu veux.</p>
+  <div class="price">
+    <div class="pl"><div class="pn">Découverte</div><div class="pp">0 €</div>
+      <ul><li>3 séances par semaine</li><li>Suivi de base</li><li>Accès communauté</li></ul>
+      <button class="btn btn-g">Commencer</button></div>
+    <div class="pl pop"><div class="pn">Premium</div><div class="pp">9,99 €<small>/mois</small></div>
+      <ul><li>Séances illimitées</li><li>Plans adaptatifs IA</li><li>Programmes nutrition</li><li>Sans publicité</li></ul>
+      <button class="btn">Essai 7 jours</button></div>
+    <div class="pl"><div class="pn">Coach+</div><div class="pp">24,99 €<small>/mois</small></div>
+      <ul><li>Tout Premium</li><li>1 bilan visio / mois</li><li>Suivi personnalisé</li></ul>
+      <button class="btn btn-g">Choisir Coach+</button></div>
+  </div>
+
+  <div class="band">
+    <h2>Ta première séance t'attend.</h2>
+    <p>Rejoins 120 000 personnes qui bougent un peu plus chaque jour.</p>
+    <button class="btn">Télécharger Kintora</button>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="logo" style="justify-content:center;margin-bottom:6px"><span class="mk">K</span>Kintora</div>
+  © 2026 Kintora — Coaching fitness.
+  <div class="fnote">Site de démonstration fictif créé pour un portfolio. Marque, chiffres et avis inventés.</div>
+</div></footer>
+</body>
+</html>

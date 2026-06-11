@@ -58,6 +58,15 @@ footer{border-top:1px solid var(--bord);padding:30px 0;color:var(--muted);font-s
 footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
 .reveal.vu{opacity:1;transform:none}
+.group-banner{margin:58px 0 6px;padding:22px 26px;border:1px solid var(--bord);border-radius:var(--rayon);background:linear-gradient(135deg,#141B27,#10203a)}
+.group-banner.demo{background:linear-gradient(135deg,#19132e,#122039);border-color:#352c57}
+.group-banner .gk{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:4px 11px;border-radius:999px;margin-bottom:11px}
+.group-banner .gk.real{background:rgba(91,141,239,.16);color:#8FB2FF}
+.group-banner .gk.demo{background:rgba(168,130,255,.18);color:#C9B2FF}
+.group-banner h2{font-size:26px;letter-spacing:-.01em}
+.group-banner p{color:var(--muted);font-size:15px;margin-top:9px;max-width:700px}
+.proj{position:relative}
+.badge-demo{position:absolute;top:12px;left:12px;z-index:2;background:rgba(11,15,23,.72);backdrop-filter:blur(4px);border:1px solid rgba(201,178,255,.55);color:#EADBFF;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px}
 @media (max-width:860px){.projs{grid-template-columns:1fr}.liens{position:fixed;inset:62px 0 auto 0;flex-direction:column;background:var(--bg2);border-bottom:1px solid var(--bord);padding:18px;gap:18px;display:none}.liens.ouvert{display:flex}.burger{display:flex}}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
   </style>
@@ -77,44 +86,48 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     <p class="kicker reveal" style="text-align:left">Réalisations</p>
     <div class="page-head reveal">
       <h1>Sites web</h1>
-      <p>Des sites vitrines modernes, multilingues (FR/EN/DE/IT/ES/PT) et optimisés mobile, classés par type d'établissement.</p>
+      <p>Des sites vitrines modernes, multilingues (FR/EN/DE/IT/ES/PT) et optimisés mobile. Deux catégories : des sites réellement réalisés pour des clients, et des maquettes de démonstration pour illustrer différents styles.</p>
     </div>
 
-    <!-- ===== RESTAURANTS ===== -->
-    <div class="typ-head reveal"><span class="k">Restauration</span><h3>Restaurants</h3></div>
-    <div class="projs">
-      <a href="https://croix-federale.logan-palmiero.workers.dev/" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#B91C1C,#7C2D12)">La Croix Fédérale</div><div class="corps"><div class="tagrow"><span class="tg">Restaurant</span><span class="tg">Sion</span></div><h3>La Croix Fédérale</h3><p>Restaurant valaisan au Grand-Pont : fondues, raclette, pierre chaude, galerie et réservation en ligne.</p><span class="open">Voir le site →</span></div></a>
-      <a href="https://la-sitteri.logan-palmiero.workers.dev/" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#4D7C0F,#1A2E05)">La Sitterie</div><div class="corps"><div class="tagrow"><span class="tg">Restaurant</span><span class="tg">Gastronomie</span><span class="tg">Multilingue</span></div><h3>La Sitterie — terroir</h3><p>Restaurant gastronomique : cuisine de montagne et de terroir, carte estivale et réservation.</p><span class="open">Voir le site →</span></div></a>
-    </div>
-
-    <!-- ===== COIFFURE ===== -->
-    <div class="typ-head reveal"><span class="k">Coiffure</span><h3>Salons de coiffure</h3></div>
-    <div class="projs">
-      <a href="https://akimbo.logan-palmiero.workers.dev/" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#10B981,#047857)">Akimbo Coiffure</div><div class="corps"><div class="tagrow"><span class="tg">Salon</span><span class="tg">Éco-responsable</span><span class="tg">Multilingue</span></div><h3>Akimbo Coiffure</h3><p>Salon éco-responsable à Sion : coloration végétale, prestations et prise de rendez-vous.</p><span class="open">Voir le site →</span></div></a>
-      <a href="https://jr-coiffure.logan-palmiero.workers.dev/" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#D97706,#7C2D12)">JR Coiffure</div><div class="corps"><div class="tagrow"><span class="tg">Salon</span><span class="tg">Visagisme</span><span class="tg">Multilingue</span></div><h3>JR Coiffure — visagisme</h3><p>Salon de coiffure et visagisme à Sion : prestations, équipe et coiffure de mariage.</p><span class="open">Voir le site →</span></div></a>
-    </div>
-
-    <!-- ===== ESTHÉTIQUE ===== -->
-    <div class="typ-head reveal"><span class="k">Esthétique</span><h3>Instituts de beauté</h3></div>
-    <div class="projs">
-      <a href="https://institut-valere.logan-palmiero.workers.dev/" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#D8729E,#7A2E50)">Institut de Valère</div><div class="corps"><div class="tagrow"><span class="tg">Esthétique</span><span class="tg">Sion</span><span class="tg">Multilingue</span></div><h3>Institut de Valère</h3><p>Institut de beauté : maquillage permanent, dermopigmentation et soins esthétiques.</p><span class="open">Voir le site →</span></div></a>
-      <a href="https://niaata.logan-palmiero.workers.dev/" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#C026D3,#6B21A8)">Niaata</div><div class="corps"><div class="tagrow"><span class="tg">Esthétique</span><span class="tg">Sion</span></div><h3>Niaata</h3><p>Institut de beauté à Sion : soins du visage et du corps dans un univers moderne.</p><span class="open">Voir le site →</span></div></a>
-      <a href="https://institut-caroline.logan-palmiero.workers.dev/" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#E879A6,#7A2E50)">Institut Caroline</div><div class="corps"><div class="tagrow"><span class="tg">Esthétique</span><span class="tg">Sion</span></div><h3>Institut de Beauté Caroline</h3><p>Institut de beauté à Sion : soins esthétiques pour femmes et hommes.</p><span class="open">Voir le site →</span></div></a>
-      <a href="https://freya-beaute.logan-palmiero.workers.dev/" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#F472B6,#9D174D)">Fraya Beauté</div><div class="corps"><div class="tagrow"><span class="tg">Esthétique</span><span class="tg">Centre-ville</span></div><h3>Institut Fraya Beauté</h3><p>Institut de beauté au cœur de Sion : soins du visage, du corps et mises en beauté.</p><span class="open">Voir le site →</span></div></a>
-      <a href="https://eclat-jeunesse.logan-palmiero.workers.dev/" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#A78BFA,#5B21B6)">Éclat Jeunesse</div><div class="corps"><div class="tagrow"><span class="tg">Esthétique</span><span class="tg">Sion</span></div><h3>Institut Éclat Jeunesse</h3><p>Institut de beauté à Sion : soins anti-âge et de bien-être.</p><span class="open">Voir le site →</span></div></a>
-      <a href="https://annie-institut.logan-palmiero.workers.dev/" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#FB7185,#881337)">Annie Institut</div><div class="corps"><div class="tagrow"><span class="tg">Esthétique</span><span class="tg">Sion &amp; Conthey</span></div><h3>Annie Institut</h3><p>Institut de beauté (Sion &amp; Conthey) : soins esthétiques personnalisés.</p><span class="open">Voir le site →</span></div></a>
-    </div>
-
-    <!-- ===== BARS ===== -->
-    <div class="typ-head reveal"><span class="k">Bar</span><h3>Bars</h3></div>
-    <div class="projs">
-      <a href="https://le-comptoir.logan-palmiero.workers.dev/" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#9333EA,#1E1B4B)">Le Comptoir</div><div class="corps"><div class="tagrow"><span class="tg">Bar</span><span class="tg">Apéro</span><span class="tg">Multilingue</span></div><h3>Le Comptoir</h3><p>Bar d'ambiance à Sion : cocktails aux sirops valaisans, vignerons du Valais et planches à partager.</p><span class="open">Voir le site →</span></div></a>
+    <!-- ============================================================
+         BLOC 1 — RÉALISATIONS CLIENTS (sites en ligne)
+         ============================================================ -->
+    <div class="group-banner reveal">
+      <span class="gk real">En ligne</span>
+      <h2>Réalisations clients</h2>
+      <p>Un site réellement conçu, livré et mis en ligne pour un client.</p>
     </div>
 
     <!-- ===== PHOTOGRAPHIE ===== -->
     <div class="typ-head reveal"><span class="k">Photographie</span><h3>Photographie</h3></div>
     <div class="projs">
       <a href="https://mille-frames.logan-palmiero.workers.dev/" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#0EA5E9,#6366F1)">Mille Frames</div><div class="corps"><div class="tagrow"><span class="tg">Portfolio</span><span class="tg">Galerie</span></div><h3>Mille Frames — photographe</h3><p>Site portfolio pour photographe : galerie interactive et expérience optimisée sur mobile.</p><span class="open">Voir le projet →</span></div></a>
+    </div>
+
+    <!-- ============================================================
+         BLOC 2 — MAQUETTES DE DÉMONSTRATION (concepts fictifs)
+         ============================================================ -->
+    <div class="group-banner demo reveal">
+      <span class="gk demo">Maquettes</span>
+      <h2>Maquettes de démonstration</h2>
+      <p>Des concepts fictifs (marques inventées) créés pour illustrer différents styles et secteurs. Parfaits pour visualiser ce qui est possible avant de lancer votre projet.</p>
+    </div>
+
+    <!-- ===== CONCEPTS ===== -->
+    <div class="typ-head reveal"><span class="k">Concepts</span><h3>Sites concepts</h3></div>
+    <div class="projs">
+      <a href="maquettes/nuvora.html" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#6C5CE7,#00D4FF)"><span class="badge-demo">Démo</span>Nuvora</div><div class="corps"><div class="tagrow"><span class="tg">Concept</span><span class="tg">SaaS</span><span class="tg">Dashboard</span></div><h3>Nuvora — SaaS analytique</h3><p>Concept d'application d'analytique produit : thème sombre, tableau de bord animé et micro-interactions.</p><span class="open">Voir la maquette →</span></div></a>
+      <a href="maquettes/kintora.html" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#34E89E,#0BA98A)"><span class="badge-demo">Démo</span>Kintora</div><div class="corps"><div class="tagrow"><span class="tg">Concept</span><span class="tg">App fitness</span><span class="tg">Landing</span></div><h3>Kintora — app fitness</h3><p>Landing d'application de coaching sportif : mockup de téléphone animé, fonctions et tarifs.</p><span class="open">Voir la maquette →</span></div></a>
+      <a href="maquettes/velora.html" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#FF5A3C,#FF8A5C)"><span class="badge-demo">Démo</span>Velora</div><div class="corps"><div class="tagrow"><span class="tg">Concept</span><span class="tg">E-commerce</span><span class="tg">Boutique</span></div><h3>Velora — boutique de sneakers</h3><p>Concept e-commerce : bandeau promo, grille produits, panier et animations de cartes.</p><span class="open">Voir la maquette →</span></div></a>
+      <a href="maquettes/studio-mirage.html" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#7B5CFF,#C8FF00)"><span class="badge-demo">Démo</span>Studio Mirage</div><div class="corps"><div class="tagrow"><span class="tg">Concept</span><span class="tg">Agence</span><span class="tg">Branding</span></div><h3>Studio Mirage — agence créative</h3><p>Concept d'agence de branding : typographie XXL, dégradés, survols animés et grille de projets.</p><span class="open">Voir la maquette →</span></div></a>
+      <a href="maquettes/osteria-lumina.html" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#C89B4A,#7A3A1C)"><span class="badge-demo">Démo</span>Osteria Lumina</div><div class="corps"><div class="tagrow"><span class="tg">Concept</span><span class="tg">Restaurant</span><span class="tg">Élégant</span></div><h3>Osteria Lumina — restaurant italien</h3><p>Concept de restaurant : ambiance sombre et dorée, carte élégante et réservation.</p><span class="open">Voir la maquette →</span></div></a>
+    </div>
+
+    <!-- ===== AVANT / APRÈS ===== -->
+    <div class="typ-head reveal"><span class="k">Refonte</span><h3>Avant / Après</h3></div>
+    <div class="projs">
+      <a href="maquettes/saint-cyr-avant.html" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#0A5D2A,#7A3A00)"><span class="badge-demo">Avant</span>Brûlerie Saint-Cyr</div><div class="corps"><div class="tagrow"><span class="tg">Avant</span><span class="tg">Refonte</span></div><h3>Saint-Cyr — l'ancienne version</h3><p>Un site volontairement dépassé (style années 2000) qui sert de point de départ à la refonte.</p><span class="open">Voir la maquette →</span></div></a>
+      <a href="maquettes/saint-cyr-apres.html" target="_blank" rel="noopener" class="proj reveal"><div class="vignette" style="background:linear-gradient(135deg,#B5552D,#7A3A1C)"><span class="badge-demo">Après</span>Brûlerie Saint-Cyr</div><div class="corps"><div class="tagrow"><span class="tg">Après</span><span class="tg">Café</span><span class="tg">Refonte</span></div><h3>Saint-Cyr — la refonte moderne</h3><p>La même enseigne, repensée : design chaleureux, mobile-first, carte et réservation.</p><span class="open">Voir la maquette →</span></div></a>
     </div>
 
     <div style="margin-top:50px"><a href="index.html#projets" class="btn btn-g">← Retour aux catégories</a></div>
@@ -133,6 +146,4 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     const rev=document.querySelectorAll('.reveal');
     if('IntersectionObserver' in window){const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vu');o.unobserve(e.target);}}),{threshold:.12});rev.forEach(el=>o.observe(el));}else rev.forEach(el=>el.classList.add('vu'));
   </script>
-  <script src="i18n.js"></script>
-</body>
-</html>
+  <script src="i

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Mirage — Agence créative & branding</title>
+<style>
+  :root{--bg:#0c0c0e;--ink:#f5f3ef;--muted:#9a9a9f;--line:#222226;--acc:#c8ff00;--card:#141417;--p:#7b5cff}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1220px;margin:0 auto;padding:0 28px}
+  nav{position:sticky;top:0;z-index:40;background:rgba(12,12,14,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:78px}
+  .logo{font-weight:800;font-size:21px;letter-spacing:-.5px;display:flex;align-items:center;gap:11px}
+  .star{width:24px;height:24px;color:var(--acc)}
+  .links{display:flex;gap:32px;color:var(--muted);font-size:15px}
+  .links a:hover{color:var(--ink)}
+  .btn{background:var(--acc);color:#0c0c0e;padding:13px 24px;border-radius:100px;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:transform .2s}
+  .btn:hover{transform:translateY(-2px)}
+  /* hero */
+  .hero{padding:80px 0 50px;position:relative}
+  .pill{display:inline-flex;gap:9px;align-items:center;border:1px solid var(--line);border-radius:100px;padding:8px 16px;font-size:13px;color:var(--muted);margin-bottom:30px}
+  .pill .d{width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc)}
+  h1{font-size:104px;line-height:.92;letter-spacing:-4px;font-weight:800;font-family:'Segoe UI',sans-serif}
+  h1 .o{-webkit-text-stroke:2px var(--ink);color:transparent}
+  h1 em{font-style:italic;font-family:Georgia,serif;font-weight:400;color:var(--acc)}
+  .herometa{display:flex;justify-content:space-between;align-items:flex-end;margin-top:36px;flex-wrap:wrap;gap:20px}
+  .herometa p{color:var(--muted);font-size:18px;max-width:420px;line-height:1.6}
+  /* logos marquee */
+  .clients{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:22px 0;margin-top:50px}
+  .clients span{display:inline-block;animation:sc 22s linear infinite;color:var(--muted);font-weight:700;font-size:22px}
+  @keyframes sc{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  .clients i{margin:0 28px;font-style:normal;opacity:.5}
+  /* services */
+  section{padding:90px 0}
+  .lab{color:var(--acc);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:13px;margin-bottom:18px}
+  .h2{font-size:54px;letter-spacing:-2px;font-weight:800;max-width:680px}
+  .srv{margin-top:40px;border-top:1px solid var(--line)}
+  .srow{display:grid;grid-template-columns:60px 1fr auto;gap:24px;align-items:center;padding:30px 0;border-bottom:1px solid var(--line);transition:padding-left .3s,background .3s;cursor:pointer}
+  .srow:hover{padding-left:18px;background:linear-gradient(90deg,#ffffff06,transparent)}
+  .srow .num{color:var(--muted);font-size:16px}
+  .srow .t{font-size:34px;font-weight:700;letter-spacing:-1px}
+  .srow:hover .t{color:var(--acc)}
+  .srow .tags{color:var(--muted);font-size:14px;text-align:right}
+  /* work */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+  .proj{border-radius:24px;overflow:hidden;position:relative;aspect-ratio:4/3;display:flex;align-items:flex-end;padding:28px;cursor:pointer;transition:transform .3s}
+  .proj:hover{transform:translateY(-6px)}
+  .proj::after{content:"↗";position:absolute;top:24px;right:26px;font-size:26px;color:#0c0c0e;opacity:0;transition:.3s}
+  .proj:hover::after{opacity:1}
+  .p1{background:linear-gradient(140deg,#7b5cff,#c8ff00)}
+  .p2{background:linear-gradient(140deg,#ff6a3d,#ffd23f)}
+  .p3{background:linear-gradient(140deg,#0fb8a0,#7b5cff)}
+  .p4{background:linear-gradient(140deg,#ff4d8d,#ff8a5c)}
+  .proj .meta{background:#0c0c0ecc;backdrop-filter:blur(6px);border-radius:14px;padding:14px 18px}
+  .proj .meta .nm{font-weight:700;font-size:19px}
+  .proj .meta .ds{color:var(--muted);font-size:13px;margin-top:2px}
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:50px 0}
+  .st .n{font-size:56px;font-weight:800;letter-spacing:-2px}
+  .st .n em{color:var(--acc);font-style:normal}
+  .st .l{color:var(--muted);font-size:15px;margin-top:6px}
+  /* cta */
+  .cta{text-align:center;padding:110px 0}
+  .cta h2{font-size:72px;letter-spacing:-3px;font-weight:800;line-height:1}
+  .cta h2 em{font-family:Georgia,serif;font-style:italic;font-weight:400;color:var(--acc)}
+  .cta .btn{margin-top:34px;padding:18px 38px;font-size:16px}
+  footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+  .fnote{width:100%;text-align:center;font-size:12px;opacity:.6;margin-top:10px}
+  @media(max-width:900px){h1{font-size:56px}.links{display:none}.h2{font-size:36px}.cta h2{font-size:44px}
+    .grid,.stats{grid-template-columns:1fr}.srow{grid-template-columns:auto 1fr}.srow .tags{display:none}.st .n{font-size:42px}}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav">
+  <div class="logo"><svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/></svg>Studio Mirage</div>
+  <div class="links"><a href="#srv">Services</a><a href="#work">Réalisations</a><a href="#">Studio</a><a href="#">Journal</a></div>
+  <button class="btn">Démarrer un projet</button>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <span class="pill"><span class="d"></span>Studio créatif · disponible Q3 2026</span>
+  <h1>On donne une <em>âme</em><br><span class="o">aux marques</span> qui osent.</h1>
+  <div class="herometa">
+    <p>Studio Mirage est une agence de branding et de design digital. On construit des identités qui marquent et des sites qui convertissent.</p>
+    <button class="btn">Voir nos réalisations →</button>
+  </div>
+</div></header>
+
+<div class="clients"><span>FLOWPINE<i>✦</i>MARISOL<i>✦</i>OCTANE<i>✦</i>VELTRA<i>✦</i>BRIGHTLOOP<i>✦</i>NOVA&CO<i>✦</i>FLOWPINE<i>✦</i>MARISOL<i>✦</i>OCTANE<i>✦</i>VELTRA<i>✦</i>BRIGHTLOOP<i>✦</i>NOVA&CO<i>✦</i></span></div>
+
+<section id="srv"><div class="wrap">
+  <div class="lab">Ce qu'on fait</div>
+  <h2 class="h2">Des services pensés pour faire grandir ta marque.</h2>
+  <div class="srv">
+    <div class="srow"><span class="num">01</span><span class="t">Identité de marque</span><span class="tags">Logo · Charte · Direction artistique</span></div>
+    <div class="srow"><span class="num">02</span><span class="t">Design web & UX</span><span class="tags">UI · Prototype · Design system</span></div>
+    <div class="srow"><span class="num">03</span><span class="t">Développement</span><span class="tags">Sites · Webapps · E-commerce</span></div>
+    <div class="srow"><span class="num">04</span><span class="t">Contenu & motion</span><span class="tags">Vidéo · Social · Animation</span></div>
+  </div>
+</div></section>
+
+<section id="work"><div class="wrap">
+  <div class="lab">Sélection</div>
+  <h2 class="h2">Quelques projets récents.</h2>
+  <div class="grid">
+    <div class="proj p1"><div class="meta"><div class="nm">Nova&Co — Rebrand</div><div class="ds">Identité · Web · 2026</div></div></div>
+    <div class="proj p2"><div class="meta"><div class="nm">Octane — Site produit</div><div class="ds">UX · Développement</div></div></div>
+    <div class="proj p3"><div class="meta"><div class="nm">Veltra — Design system</div><div class="ds">UI · Composants</div></div></div>
+    <div class="proj p4"><div class="meta"><div class="nm">Marisol — Campagne</div><div class="ds">Motion · Social</div></div></div>
+  </div>
+</div></section>
+
+<div class="wrap"><div class="stats">
+  <div class="st"><div class="n"><em>80</em>+</div><div class="l">projets livrés</div></div>
+  <div class="st"><div class="n"><em>12</em></div><div class="l">récompenses design</div></div>
+  <div class="st"><div class="n"><em>6</em> ans</div><div class="l">d'existence</div></div>
+  <div class="st"><div class="n"><em>98</em>%</div><div class="l">clients satisfaits</div></div>
+</div></div>
+
+<section class="cta"><div class="wrap">
+  <h2>Un projet en tête ?<br>Faisons-le <em>briller</em>.</h2>
+  <button class="btn">Démarrer un projet →</button>
+</div></section>
+
+<footer><div class="wrap" style="display:contents">
+  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;width:100%">
+    <div class="logo"><svg class="star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/></svg>Studio Mirage</div>
+    <div>hello@studiomirage.fictif · Lyon</div>
+    <div>© 2026 Studio Mirage</div>
+    <div class="fnote">Site de démonstration fictif créé pour un portfolio. Agence, clients et chiffres inventés.</div>
+  </div>
+</div></footer>
+</body>
+</html>

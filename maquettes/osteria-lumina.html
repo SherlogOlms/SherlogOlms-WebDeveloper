@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Osteria Lumina — Cuisine italienne</title>
+<style>
+  :root{--bg:#13100c;--ink:#f4ece0;--muted:#b3a691;--acc:#c89b4a;--card:#1c1812;--line:#2e2820;--deep:#0d0b08}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3,.serif{font-family:Georgia,'Times New Roman',serif}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 26px}
+  nav{position:sticky;top:0;z-index:40;background:rgba(19,16,12,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:80px}
+  .logo{font-family:Georgia,serif;font-size:24px;font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:10px}
+  .logo .fl{color:var(--acc)}
+  .links{display:flex;gap:32px;color:var(--muted);font-size:15px;letter-spacing:.3px}
+  .links a:hover{color:var(--acc)}
+  .btn{background:var(--acc);color:var(--deep);padding:13px 26px;border-radius:4px;font-weight:600;font-size:14px;letter-spacing:.5px;border:none;cursor:pointer;transition:transform .2s,background .2s}
+  .btn:hover{transform:translateY(-2px);background:#d8ac5c}
+  .btn-o{background:transparent;border:1px solid var(--acc);color:var(--acc)}
+  /* hero */
+  .hero{min-height:88vh;display:flex;align-items:center;position:relative;text-align:center;
+    background:radial-gradient(circle at 50% 30%,#2a2114,transparent 60%),var(--bg)}
+  .hero .deco{position:absolute;inset:0;background-image:radial-gradient(circle at 20% 80%,#c89b4a18,transparent 40%),radial-gradient(circle at 85% 20%,#c89b4a14,transparent 40%)}
+  .hero .in{position:relative;width:100%}
+  .kicker{color:var(--acc);letter-spacing:5px;text-transform:uppercase;font-size:13px;margin-bottom:24px}
+  .hero h1{font-size:88px;line-height:1.02;letter-spacing:-1px;font-weight:400}
+  .hero h1 em{font-style:italic;color:var(--acc)}
+  .hero p{color:var(--muted);font-size:19px;max-width:520px;margin:26px auto 36px;line-height:1.7}
+  .hero .row{display:flex;gap:14px;justify-content:center}
+  .scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:12px;letter-spacing:2px}
+  .scroll::after{content:"";display:block;width:1px;height:34px;background:var(--acc);margin:10px auto 0;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:.3;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
+  /* about */
+  section{padding:100px 0}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .frame{aspect-ratio:4/5;border-radius:6px;background:linear-gradient(160deg,#2a2014,#161009);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:130px;position:relative;overflow:hidden}
+  .frame::after{content:"";position:absolute;inset:14px;border:1px solid #c89b4a40}
+  .lab{color:var(--acc);letter-spacing:3px;text-transform:uppercase;font-size:12px;margin-bottom:20px}
+  .two h2{font-size:48px;font-weight:400;letter-spacing:-1px;line-height:1.1}
+  .two h2 em{font-style:italic;color:var(--acc)}
+  .two p{color:var(--muted);font-size:17px;line-height:1.8;margin:22px 0}
+  .sig{font-family:Georgia,serif;font-style:italic;color:var(--acc);font-size:26px;margin-top:18px}
+  /* menu */
+  .menu{background:var(--deep)}
+  .center{text-align:center}
+  .center h2{font-size:52px;font-weight:400;letter-spacing:-1px}
+  .center h2 em{font-style:italic;color:var(--acc)}
+  .center .lab{margin-bottom:14px}
+  .mcols{display:grid;grid-template-columns:1fr 1fr;gap:50px 70px;max-width:960px;margin:54px auto 0}
+  .mcat{font-family:Georgia,serif;font-size:15px;letter-spacing:3px;text-transform:uppercase;color:var(--acc);padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:8px}
+  .mi{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px dashed var(--line)}
+  .mi .nm{font-family:Georgia,serif;font-size:19px}
+  .mi .ds{color:var(--muted);font-size:13px;margin-top:4px;font-style:italic}
+  .mi .pr{color:var(--acc);font-weight:600;white-space:nowrap}
+  /* hours / reserve band */
+  .band{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:56px;margin-top:30px}
+  .band h2{font-size:42px;font-weight:400;letter-spacing:-1px}
+  .band h2 em{font-style:italic;color:var(--acc)}
+  .band p{color:var(--muted);margin:16px 0 26px;line-height:1.7}
+  .hrs{list-style:none}
+  .hrs li{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:15px}
+  .hrs li b{color:var(--ink);font-weight:600}
+  footer{border-top:1px solid var(--line);padding:46px 0;text-align:center;color:var(--muted);font-size:14px}
+  footer .logo{justify-content:center;margin-bottom:14px}
+  .fnote{margin-top:12px;font-size:12px;opacity:.6}
+  @media(max-width:900px){.hero h1{font-size:50px}.links{display:none}.two,.mcols,.band{grid-template-columns:1fr}
+    .center h2{font-size:36px}.frame{aspect-ratio:3/2}}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav">
+  <div class="logo"><span class="fl">✦</span>Osteria Lumina</div>
+  <div class="links"><a href="#about">La maison</a><a href="#menu">La carte</a><a href="#">Cave</a><a href="#hours">Nous trouver</a></div>
+  <button class="btn">Réserver</button>
+</div></nav>
+
+<header class="hero">
+  <div class="deco"></div>
+  <div class="in"><div class="wrap">
+    <div class="kicker">Cuisine italienne · Depuis 2014</div>
+    <h1>La <em>dolce vita</em>,<br>à chaque assiette.</h1>
+    <p>Pâtes fraîches faites maison, produits de saison et une cave choisie avec soin. Au cœur du vieux quartier.</p>
+    <div class="row"><button class="btn">Réserver une table</button><button class="btn btn-o">Voir la carte</button></div>
+  </div></div>
+  <div class="scroll">DÉCOUVRIR</div>
+</header>
+
+<section id="about"><div class="wrap two">
+  <div class="frame">🍝</div>
+  <div>
+    <div class="lab">Notre histoire</div>
+    <h2>Une cuisine <em>simple</em>,<br>des produits <em>vrais</em>.</h2>
+    <p>Tout commence en cuisine, chaque matin. Nos pâtes sont pétries à la main, nos sauces mijotées lentement, et notre carte change au rythme des saisons et du marché.</p>
+    <p>Ici, on prend le temps. Celui de bien manger, de partager une bouteille, et de se sentir un peu en Italie.</p>
+    <div class="sig">— Chef Elena Vitali</div>
+  </div>
+</div></section>
+
+<section class="menu" id="menu"><div class="wrap">
+  <div class="center"><div class="lab">La carte</div><h2>Nos <em>spécialités</em></h2></div>
+  <div class="mcols">
+    <div>
+      <div class="mcat">Antipasti</div>
+      <div class="mi"><div><div class="nm">Burrata des Pouilles</div><div class="ds">Tomates confites, basilic, huile d'olive</div></div><span class="pr">14 €</span></div>
+      <div class="mi"><div><div class="nm">Vitello tonnato</div><div class="ds">Veau rosé, sauce au thon, câpres</div></div><span class="pr">16 €</span></div>
+      <div class="mi"><div><div class="nm">Antipasti della casa</div><div class="ds">Assortiment de charcuteries et légumes</div></div><span class="pr">19 €</span></div>
+    </div>
+    <div>
+      <div class="mcat">Primi</div>
+      <div class="mi"><div><div class="nm">Tagliatelle al ragù</div><div class="ds">Ragoût de bœuf mijoté 6 h</div></div><span class="pr">18 €</span></div>
+      <div class="mi"><div><div class="nm">Cacio e pepe</div><div class="ds">Pecorino romano, poivre noir</div></div><span class="pr">17 €</span></div>
+      <div class="mi"><div><div class="nm">Risotto ai funghi</div><div class="ds">Champignons de saison, parmesan</div></div><span class="pr">20 €</span></div>
+    </div>
+    <div>
+      <div class="mcat">Secondi</div>
+      <div class="mi"><div><div class="nm">Osso buco</div><div class="ds">Jarret de veau, gremolata, polenta</div></div><span class="pr">26 €</span></div>
+      <div class="mi"><div><div class="nm">Branzino al forno</div><div class="ds">Bar entier rôti, herbes, citron</div></div><span class="pr">24 €</span></div>
+    </div>
+    <div>
+      <div class="mcat">Dolci</div>
+      <div class="mi"><div><div class="nm">Tiramisù della casa</div><div class="ds">Recette de la nonna</div></div><span class="pr">9 €</span></div>
+      <div class="mi"><div><div class="nm">Panna cotta</div><div class="ds">Coulis de fruits rouges</div></div><span class="pr">8 €</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="hours"><div class="wrap"><div class="band">
+  <div>
+    <div class="lab">Réservation</div>
+    <h2>Venez vous <em>attabler</em>.</h2>
+    <p>Réservation conseillée le week-end. Groupes et privatisations sur demande.</p>
+    <button class="btn">Réserver une table</button>
+  </div>
+  <ul class="hrs">
+    <li><b>Mardi – Jeudi</b><span>12 h – 14 h · 19 h – 22 h</span></li>
+    <li><b>Vendredi – Samedi</b><span>12 h – 14 h · 19 h – 23 h</span></li>
+    <li><b>Dimanche</b><span>12 h – 15 h</span></li>
+    <li><b>Lundi</b><span>Fermé</span></li>
+    <li style="border:none;margin-top:8px"><b>Adresse</b><span>8 place des Lanternes</span></li>
+  </ul>
+</div></div></section>
+
+<footer><div class="wrap">
+  <div class="logo"><span class="fl">✦</span>Osteria Lumina</div>
+  8 place des Lanternes · 01 23 45 67 89 · ciao@osterialumina.fictif<br>
+  © 2026 Osteria Lumina — Cuisine italienne.
+  <div class="fnote">Site de démonstration fictif créé pour un portfolio. Nom, chef, adresse et coordonnées inventés.</div>
+</div></footer>
+</body>
+</html>
