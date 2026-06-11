@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ardoise — Le menu digital qui se met à jour tout seul</title>
+<style>
+  :root{--bg:#171210;--bg2:#1f1814;--ink:#f6ede2;--muted:#b7a594;--acc:#e8923c;--acc2:#c0492b;--card:#221a15;--line:#352a22;--deep:#0f0b09}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:40;background:rgba(23,18,16,.84);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px;letter-spacing:-.5px}
+  .mk{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
+  .links{display:flex;gap:30px;color:var(--muted);font-size:15px}
+  .links a:hover{color:var(--ink)}
+  .btn{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;padding:12px 22px;border-radius:100px;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px #c0492b45}
+  .btn-g{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  .hero{display:grid;grid-template-columns:1fr .82fr;gap:36px;align-items:center;padding:70px 0 50px;position:relative}
+  .glow{position:absolute;top:-90px;right:-60px;width:560px;height:520px;background:radial-gradient(circle,#e8923c2e,transparent 60%);filter:blur(54px);z-index:-1}
+  .eyebrow{display:inline-flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);padding:7px 14px;border-radius:100px;font-size:13px;color:var(--acc);font-weight:600;margin-bottom:22px}
+  h1{font-size:56px;line-height:1.04;letter-spacing:-2px;font-weight:800}
+  h1 .g{background:linear-gradient(120deg,var(--acc),#f3b765);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--muted);font-size:18px;line-height:1.65;margin:22px 0 30px;max-width:440px}
+  .cta{display:flex;gap:13px;flex-wrap:wrap}
+  .stat{display:flex;gap:34px;margin-top:38px}
+  .stat .n{font-size:26px;font-weight:800}.stat .l{color:var(--muted);font-size:13px}
+  .phonewrap{display:flex;justify-content:center}
+  .phone{width:288px;height:588px;background:#0d0a08;border:11px solid #060403;border-radius:42px;box-shadow:0 40px 90px #00000095;overflow:hidden;position:relative;animation:floatp 6s ease-in-out infinite}
+  @keyframes floatp{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:24px;background:#060403;border-radius:0 0 16px 16px;z-index:5}
+  .screen{height:100%;background:linear-gradient(180deg,#221a15,#15100d);padding:30px 0 0;overflow:hidden}
+  .mh{padding:6px 16px 12px;border-bottom:1px solid var(--line)}
+  .mh .r{display:flex;align-items:center;justify-content:space-between}
+  .mh .nm{font-weight:800;font-size:19px}
+  .mh .lg{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:flex;align-items:center;justify-content:center;font-size:18px}
+  .mh .s{font-size:11px;color:var(--muted);margin-top:2px}
+  .tabs{display:flex;gap:7px;padding:12px 16px 6px;overflow:hidden}
+  .tab{font-size:12px;padding:6px 12px;border-radius:100px;background:#2a201a;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+  .tab.on{background:linear-gradient(135deg,var(--acc),var(--acc2));border-color:transparent;color:#fff;font-weight:700}
+  .cat{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--acc);padding:12px 16px 6px;font-weight:700}
+  .dish{display:flex;gap:11px;padding:10px 16px;border-bottom:1px solid #2a201a;align-items:center}
+  .dish .im{width:46px;height:46px;border-radius:11px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:23px;background:#2a201a}
+  .dish .nm{font-weight:700;font-size:13px;display:flex;align-items:center;gap:6px}
+  .dish .ds{font-size:11px;color:var(--muted);margin-top:2px}
+  .dish .pr{margin-left:auto;font-weight:800;font-size:13px;color:var(--acc);white-space:nowrap}
+  .hot{font-size:9px;font-weight:800;color:#fff;background:var(--acc2);padding:2px 6px;border-radius:6px;text-transform:uppercase;letter-spacing:.5px}
+  .alg{font-size:9px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1px 5px}
+  section{padding:74px 0}
+  .h2{text-align:center;font-size:40px;font-weight:800;letter-spacing:-1px}
+  .lead{text-align:center;color:var(--muted);font-size:17px;margin:14px auto 46px;max-width:520px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .f{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:transform .25s,border-color .25s}
+  .f:hover{transform:translateY(-6px);border-color:var(--acc)}
+  .f .ic{width:46px;height:46px;border-radius:12px;background:#e8923c1f;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+  .f h3{font-size:18px;margin-bottom:8px}.f p{color:var(--muted);font-size:15px;line-height:1.6}
+  .qrband{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px;margin-top:10px}
+  .qr{width:128px;height:128px;border-radius:14px;background:
+     linear-gradient(#171210 3px,transparent 0) 0 0/100% 11px,
+     linear-gradient(90deg,#171210 3px,transparent 0) 0 0/11px 100%,#f6ede2;border:7px solid #f6ede2;flex-shrink:0}
+  .qrband h3{font-size:24px;margin-bottom:8px}.qrband p{color:var(--muted);font-size:15px;line-height:1.6}
+  .band{margin-top:30px;background:linear-gradient(120deg,var(--acc),var(--acc2));color:#fff;border-radius:24px;padding:54px;text-align:center}
+  .band h2{font-size:36px;font-weight:800;letter-spacing:-1px}.band p{margin:14px 0 24px;opacity:.9}
+  .band .btn{background:#fff;color:var(--acc2)}
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:14px}
+  .fnote{margin-top:8px;font-size:12px;opacity:.65}
+  @media(max-width:880px){.hero{grid-template-columns:1fr}h1{font-size:40px}.links{display:none}.grid{grid-template-columns:1fr}.qrband{grid-template-columns:1fr;text-align:center;justify-items:center}}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav">
+  <div class="logo"><span class="mk">A</span>Ardoise</div>
+  <div class="links"><a href="#feat">Fonctions</a><a href="#qr">Le QR</a><a href="#">Tarifs</a></div>
+  <div style="display:flex;gap:10px"><button class="btn btn-g">Connexion</button><button class="btn">Essayer</button></div>
+</div></nav>
+
+<header class="wrap hero">
+  <div>
+    <span class="eyebrow">● Pour restaurants, bars &amp; cafés</span>
+    <h1>Le menu digital qui <span class="g">se met à jour tout seul</span>.</h1>
+    <p>Un QR code sur la table, et vos clients consultent la carte sur leur téléphone : photos, allergènes, prix à jour. Une rupture ? Vous masquez le plat en un clic, sans réimprimer.</p>
+    <div class="cta"><button class="btn">Créer ma carte</button><button class="btn btn-g">Voir un exemple</button></div>
+    <div class="stat">
+      <div><div class="n">0</div><div class="l">menu à réimprimer</div></div>
+      <div><div class="n">6 langues</div><div class="l">traduction automatique</div></div>
+      <div><div class="n">2 min</div><div class="l">pour modifier la carte</div></div>
+    </div>
+  </div>
+  <div class="phonewrap">
+    <div class="phone"><div class="notch"></div><div class="screen">
+      <div class="mh"><div class="r"><div><div class="nm">Le Comptoir</div><div class="s">Bar · Sion</div></div><div class="lg">🍽️</div></div></div>
+      <div class="tabs"><span class="tab on">Entrées</span><span class="tab">Plats</span><span class="tab">Desserts</span><span class="tab">Boissons</span></div>
+      <div class="cat">Entrées</div>
+      <div class="dish"><div class="im">🧀</div><div><div class="nm">Planche valaisanne <span class="hot">Populaire</span></div><div class="ds">Viande séchée, fromage, cornichons</div></div><span class="pr">18.—</span></div>
+      <div class="dish"><div class="im">🥗</div><div><div class="nm">Salade de chèvre chaud</div><div class="ds">Miel, noix, roquette <span class="alg">lait</span> <span class="alg">noix</span></div></div><span class="pr">15.—</span></div>
+      <div class="dish"><div class="im">🍲</div><div><div class="nm">Soupe du moment</div><div class="ds">Selon le marché</div></div><span class="pr">9.—</span></div>
+      <div class="cat">Plats</div>
+      <div class="dish"><div class="im">🍝</div><div><div class="nm">Tagliatelles maison <span class="hot">Populaire</span></div><div class="ds">Champignons, crème, parmesan <span class="alg">gluten</span></div></div><span class="pr">24.—</span></div>
+      <div class="dish"><div class="im">🥩</div><div><div class="nm">Entrecôte &amp; frites</div><div class="ds">Beurre maître d'hôtel</div></div><span class="pr">32.—</span></div>
+    </div></div>
+  </div>
+</header>
+
+<section id="feat"><div class="wrap">
+  <h2 class="h2">Une carte vivante, jamais dépassée</h2>
+  <p class="lead">Modifiez vos plats, vos prix et vos disponibilités en direct — vos clients voient toujours la bonne version.</p>
+  <div class="grid">
+    <div class="f"><div class="ic">⚡</div><h3>Mise à jour en temps réel</h3><p>Changement de prix, plat du jour, rupture : la carte change instantanément. Plus jamais de menu raturé.</p></div>
+    <div class="f"><div class="ic">🌍</div><h3>Traduction automatique</h3><p>Votre carte s'affiche dans la langue du client. Idéal pour la clientèle touristique du Valais.</p></div>
+    <div class="f"><div class="ic">🥜</div><h3>Allergènes &amp; photos</h3><p>Chaque plat peut afficher sa photo et ses allergènes. Vos clients commandent en confiance.</p></div>
+    <div class="f"><div class="ic">📵</div><h3>Sans application</h3><p>Un simple scan ouvre la carte dans le navigateur. Rien à télécharger, pour personne.</p></div>
+    <div class="f"><div class="ic">🍷</div><h3>Mises en avant</h3><p>Suggestions du chef, accords mets-vins, plats populaires : guidez le choix et augmentez le panier moyen.</p></div>
+    <div class="f"><div class="ic">📊</div><h3>Plats les plus vus</h3><p>Découvrez ce qui attire l'œil de vos clients et ajustez votre carte en conséquence.</p></div>
+  </div>
+</div></section>
+
+<section id="qr" style="background:var(--bg2)"><div class="wrap">
+  <h2 class="h2">Un seul QR, posé sur la table</h2>
+  <p class="lead">Imprimez-le une fois. La carte derrière, elle, évolue autant que vous voulez.</p>
+  <div class="qrband">
+    <div class="qr"></div>
+    <div>
+      <h3>Scannez, c'est servi</h3>
+      <p>Le client scanne avec l'appareil photo, la carte s'ouvre aussitôt. Pas de carte qui traîne, pas de manipulation, et une image moderne pour votre établissement. Vous gérez tout depuis un tableau de bord simple, sur ordinateur ou téléphone.</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <h2>Donnez à votre carte la place qu'elle mérite.</h2>
+    <p>Essai gratuit. Votre première carte est prête en moins d'une heure.</p>
+    <button class="btn">Créer ma carte Ardoise</button>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="logo" style="justify-content:center;margin-bottom:6px"><span class="mk">A</span>Ardoise</div>
+  © 2026 Ardoise — Menu digital pour la restauration.
+  <div class="fnote">Application de démonstration fictive créée pour un portfolio. Marque, plats et prix inventés.</div>
+</div></footer>
+</body>
+</html>

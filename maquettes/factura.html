@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Factura — Devis et factures, réglés plus vite</title>
+<style>
+  :root{--bg:#f5f6fb;--ink:#161a2e;--muted:#6b7192;--acc:#4f46e5;--acc2:#10b981;--card:#fff;--line:#e7e9f3;--soft:#eef0fb}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:40;background:rgba(245,246,251,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px;letter-spacing:-.5px}
+  .mk{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--acc),#7c6cf5);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
+  .links{display:flex;gap:30px;color:var(--muted);font-size:15px}
+  .links a:hover{color:var(--ink)}
+  .btn{background:linear-gradient(135deg,var(--acc),#6d5cf5);color:#fff;padding:12px 22px;border-radius:10px;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px #4f46e540}
+  .btn-g{background:#fff;border:1px solid var(--line);color:var(--ink)}
+  .hero{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center;padding:70px 0 50px;position:relative}
+  .eyebrow{display:inline-flex;gap:8px;align-items:center;background:var(--soft);border:1px solid #dcdef5;padding:7px 14px;border-radius:100px;font-size:13px;color:var(--acc);font-weight:700;margin-bottom:22px}
+  h1{font-size:54px;line-height:1.05;letter-spacing:-2px;font-weight:800}
+  h1 .g{background:linear-gradient(120deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero>div:first-child p{color:var(--muted);font-size:18px;line-height:1.65;margin:22px 0 30px;max-width:430px}
+  .cta{display:flex;gap:13px;flex-wrap:wrap}
+  .stat{display:flex;gap:34px;margin-top:38px}
+  .stat .n{font-size:26px;font-weight:800}.stat .l{color:var(--muted);font-size:13px}
+  .app{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 30px 70px #4f46e518;display:grid;grid-template-columns:150px 1fr}
+  .aside{background:#fafbff;border-right:1px solid var(--line);padding:16px 12px;display:flex;flex-direction:column;gap:4px}
+  .brand{display:flex;align-items:center;gap:8px;font-weight:800;font-size:15px;margin-bottom:12px}
+  .brand .b{width:22px;height:22px;border-radius:7px;background:linear-gradient(135deg,var(--acc),#7c6cf5)}
+  .si{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);padding:8px 9px;border-radius:8px}
+  .si.on{background:var(--soft);color:var(--acc);font-weight:700}
+  .si i{width:14px;height:14px;border-radius:4px;background:#d7daee}.si.on i{background:var(--acc)}
+  .doc{padding:20px}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+  .kpi{border:1px solid var(--line);border-radius:11px;padding:12px}
+  .kpi .l{font-size:11px;color:var(--muted)}
+  .kpi .v{font-size:19px;font-weight:800;margin-top:3px}
+  .kpi .v.g{color:var(--acc2)}.kpi .v.r{color:#ef4444}
+  .inv{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .inv .top{display:flex;justify-content:space-between;align-items:flex-start;padding:14px 16px;background:linear-gradient(135deg,#4f46e5,#7c6cf5);color:#fff}
+  .inv .top .t{font-size:12px;opacity:.85}.inv .top .h{font-weight:800;font-size:17px}
+  .inv .top .am{font-weight:800;font-size:19px}
+  .li{display:flex;justify-content:space-between;padding:9px 16px;font-size:12px;border-bottom:1px solid var(--line);color:var(--muted)}
+  .li b{color:var(--ink);font-weight:600}
+  .tot{display:flex;justify-content:space-between;padding:11px 16px;font-weight:800;font-size:13px}
+  .rows{margin-top:14px}
+  .row{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid var(--line);font-size:12px}
+  .row .who{font-weight:600}.row .dt{color:var(--muted);margin-left:auto;margin-right:10px}
+  .pill{font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px}
+  .pill.ok{background:#10b98119;color:#059669}.pill.wait{background:#f59e0b19;color:#b45309}.pill.late{background:#ef444419;color:#dc2626}
+  section{padding:74px 0}
+  .h2{text-align:center;font-size:40px;font-weight:800;letter-spacing:-1px}
+  .lead{text-align:center;color:var(--muted);font-size:17px;margin:14px auto 46px;max-width:520px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .f{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:transform .25s,border-color .25s}
+  .f:hover{transform:translateY(-6px);border-color:var(--acc)}
+  .f .ic{width:46px;height:46px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+  .f h3{font-size:18px;margin-bottom:8px}.f p{color:var(--muted);font-size:15px;line-height:1.6}
+  .band{margin-top:30px;background:linear-gradient(120deg,var(--acc),#7c6cf5);color:#fff;border-radius:24px;padding:54px;text-align:center}
+  .band h2{font-size:36px;font-weight:800;letter-spacing:-1px}.band p{margin:14px 0 24px;opacity:.9}
+  .band .btn{background:#fff;color:var(--acc)}
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:14px}
+  .fnote{margin-top:8px;font-size:12px;opacity:.7}
+  @media(max-width:880px){.hero{grid-template-columns:1fr}h1{font-size:40px}.links{display:none}.grid{grid-template-columns:1fr}.app{grid-template-columns:1fr}.aside{flex-direction:row;overflow:hidden;border-right:none;border-bottom:1px solid var(--line)}}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav">
+  <div class="logo"><span class="mk">F</span>Factura</div>
+  <div class="links"><a href="#feat">Fonctions</a><a href="#">Tarifs</a><a href="#">Modèles</a></div>
+  <div style="display:flex;gap:10px"><button class="btn btn-g">Connexion</button><button class="btn">Essai gratuit</button></div>
+</div></nav>
+
+<header class="wrap hero">
+  <div>
+    <span class="eyebrow">● Pour indépendants, artisans &amp; petites entreprises</span>
+    <h1>Vos devis et factures, <span class="g">réglés plus vite</span>.</h1>
+    <p>Factura crée vos documents en deux minutes, relance automatiquement les impayés et vous montre où en est votre trésorerie. Vous facturez, on s'occupe du suivi.</p>
+    <div class="cta"><button class="btn">Créer ma première facture</button><button class="btn btn-g">Voir une démo</button></div>
+    <div class="stat">
+      <div><div class="n">−11 jours</div><div class="l">de délai de paiement</div></div>
+      <div><div class="n">2 min</div><div class="l">pour un devis</div></div>
+      <div><div class="n">0</div><div class="l">relance oubliée</div></div>
+    </div>
+  </div>
+  <div class="app">
+    <div class="aside">
+      <div class="brand"><span class="b"></span>Factura</div>
+      <div class="si on"><i></i>Tableau de bord</div>
+      <div class="si"><i></i>Devis</div>
+      <div class="si"><i></i>Factures</div>
+      <div class="si"><i></i>Clients</div>
+      <div class="si"><i></i>Paiements</div>
+    </div>
+    <div class="doc">
+      <div class="kpis">
+        <div class="kpi"><div class="l">Encaissé (juin)</div><div class="v g">8 420 €</div></div>
+        <div class="kpi"><div class="l">En attente</div><div class="v">3 150 €</div></div>
+        <div class="kpi"><div class="l">En retard</div><div class="v r">620 €</div></div>
+      </div>
+      <div class="inv">
+        <div class="top"><div><div class="t">Facture #2026-094</div><div class="h">Menuiserie Berto</div></div><div class="am">1 240 €</div></div>
+        <div class="li"><b>Pose parquet chêne — 18 m²</b><span>980 €</span></div>
+        <div class="li"><b>Déplacement &amp; fournitures</b><span>180 €</span></div>
+        <div class="li"><b>TVA 8,1 %</b><span>80 €</span></div>
+        <div class="tot"><span>Total TTC</span><span>1 240 €</span></div>
+      </div>
+      <div class="rows">
+        <div class="row"><span class="who">Salon Élise</span><span class="dt">12 juin</span><span class="pill ok">Payée</span></div>
+        <div class="row"><span class="who">Café du Marché</span><span class="dt">10 juin</span><span class="pill wait">Envoyée</span></div>
+        <div class="row"><span class="who">Garage Praz</span><span class="dt">2 juin</span><span class="pill late">En retard</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="feat"><div class="wrap">
+  <h2 class="h2">La paperasse en pilote automatique</h2>
+  <p class="lead">Conçu pour celles et ceux qui préfèrent leur métier à l'administratif.</p>
+  <div class="grid">
+    <div class="f"><div class="ic">⚡</div><h3>Devis en 2 minutes</h3><p>Modèles prêts à l'emploi, articles enregistrés, calcul de TVA automatique. Envoyez, le client signe en ligne.</p></div>
+    <div class="f"><div class="ic">🔁</div><h3>Relances automatiques</h3><p>Factura relance poliment vos clients en retard, à votre place. Vous êtes payé sans avoir à courir après.</p></div>
+    <div class="f"><div class="ic">💳</div><h3>Paiement en ligne</h3><p>Un bouton « Payer » sur chaque facture. Le client règle en un clic, vous êtes crédité plus vite.</p></div>
+    <div class="f"><div class="ic">📄</div><h3>Devis → facture</h3><p>Un devis accepté devient une facture en un clic. Plus de ressaisie, plus d'erreur.</p></div>
+    <div class="f"><div class="ic">🧮</div><h3>Suivi TVA &amp; trésorerie</h3><p>Encaissé, en attente, en retard : votre situation est claire en un coup d'œil, à tout moment.</p></div>
+    <div class="f"><div class="ic">📤</div><h3>Export comptable</h3><p>Tout s'exporte proprement pour votre fiduciaire. La clôture devient une formalité.</p></div>
+  </div>
+
+  <div class="band">
+    <h2>Facturez aujourd'hui, soyez payé plus tôt.</h2>
+    <p>Essai gratuit de 30 jours. Sans carte bancaire.</p>
+    <button class="btn">Démarrer avec Factura</button>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="logo" style="justify-content:center;margin-bottom:6px"><span class="mk">F</span>Factura</div>
+  © 2026 Factura — Devis &amp; factures pour indépendants.
+  <div class="fnote">Application de démonstration fictive créée pour un portfolio. Marque, clients et montants inventés.</div>
+</div></footer>
+</body>
+</html>

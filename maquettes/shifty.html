@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shifty — Le planning d'équipe qui se fait en 10 minutes</title>
+<style>
+  :root{--bg:#0d0b1a;--bg2:#13112a;--ink:#eee9ff;--muted:#a39cca;--acc:#8b5cf6;--acc2:#22d3ee;--card:#171430;--line:#272247;
+    --c1:#8b5cf6;--c2:#22d3ee;--c3:#f472b6;--c4:#fbbf24}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:40;background:rgba(13,11,26,.84);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px;letter-spacing:-.5px}
+  .mk{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:flex;align-items:center;justify-content:center;color:#0d0b1a;font-weight:900}
+  .links{display:flex;gap:30px;color:var(--muted);font-size:15px}
+  .links a:hover{color:var(--ink)}
+  .btn{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#0d0b1a;padding:12px 22px;border-radius:100px;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px #8b5cf645}
+  .btn-g{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  .hero{display:grid;grid-template-columns:.9fr 1.1fr;gap:38px;align-items:center;padding:70px 0 50px;position:relative}
+  .glow{position:absolute;top:-90px;right:-50px;width:600px;height:520px;background:radial-gradient(circle,#8b5cf630,transparent 60%);filter:blur(54px);z-index:-1}
+  .eyebrow{display:inline-flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);padding:7px 14px;border-radius:100px;font-size:13px;color:var(--acc2);font-weight:600;margin-bottom:22px}
+  h1{font-size:54px;line-height:1.05;letter-spacing:-2px;font-weight:800}
+  h1 .g{background:linear-gradient(120deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero>div:first-child p{color:var(--muted);font-size:18px;line-height:1.65;margin:22px 0 30px;max-width:430px}
+  .cta{display:flex;gap:13px;flex-wrap:wrap}
+  .stat{display:flex;gap:30px;margin-top:38px}
+  .stat .n{font-size:25px;font-weight:800}.stat .l{color:var(--muted);font-size:13px}
+  .board{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 30px 70px #00000070}
+  .bh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .bh .t{font-weight:800;font-size:15px}.bh .w{font-size:12px;color:var(--muted)}
+  .cov{font-size:11px;font-weight:700;color:var(--acc2);background:#22d3ee18;border:1px solid #22d3ee33;padding:4px 10px;border-radius:999px}
+  .cal{display:grid;grid-template-columns:54px repeat(5,1fr);gap:6px}
+  .hd{font-size:11px;color:var(--muted);text-align:center;padding-bottom:4px}
+  .hd b{display:block;color:var(--ink);font-size:13px}
+  .tl{font-size:10px;color:var(--muted);display:flex;align-items:center;justify-content:flex-end;padding-right:6px}
+  .cell{background:#100e24;border:1px solid var(--line);border-radius:9px;min-height:46px;padding:4px;display:flex;flex-direction:column;gap:3px}
+  .sh{border-radius:6px;padding:3px 6px;font-size:10px;font-weight:700;color:#0d0b1a;line-height:1.25}
+  .sh small{display:block;font-weight:600;opacity:.8;font-size:9px}
+  .s1{background:var(--c1)}.s2{background:var(--c2)}.s3{background:var(--c3)}.s4{background:var(--c4)}
+  .empty{flex:1;border:1px dashed #2c2750;border-radius:6px}
+  .team{display:flex;gap:14px;margin-top:12px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+  .team span{display:flex;align-items:center;gap:6px}
+  .dot{width:10px;height:10px;border-radius:3px;display:inline-block}
+  section{padding:74px 0}
+  .h2{text-align:center;font-size:40px;font-weight:800;letter-spacing:-1px}
+  .lead{text-align:center;color:var(--muted);font-size:17px;margin:14px auto 46px;max-width:520px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .f{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:transform .25s,border-color .25s}
+  .f:hover{transform:translateY(-6px);border-color:var(--acc)}
+  .f .ic{width:46px;height:46px;border-radius:12px;background:#8b5cf61f;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+  .f h3{font-size:18px;margin-bottom:8px}.f p{color:var(--muted);font-size:15px;line-height:1.6}
+  .band{margin-top:30px;background:linear-gradient(120deg,var(--acc),var(--acc2));color:#0d0b1a;border-radius:24px;padding:54px;text-align:center}
+  .band h2{font-size:36px;font-weight:800;letter-spacing:-1px}.band p{margin:14px 0 24px;font-weight:500;opacity:.82}
+  .band .btn{background:#0d0b1a;color:var(--acc2)}
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:14px}
+  .fnote{margin-top:8px;font-size:12px;opacity:.65}
+  @media(max-width:880px){.hero{grid-template-columns:1fr}h1{font-size:40px}.links{display:none}.grid{grid-template-columns:1fr}.cal{grid-template-columns:40px repeat(5,1fr)}}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav">
+  <div class="logo"><span class="mk">S</span>Shifty</div>
+  <div class="links"><a href="#feat">Fonctions</a><a href="#">Tarifs</a><a href="#">Pointage</a></div>
+  <div style="display:flex;gap:10px"><button class="btn btn-g">Connexion</button><button class="btn">Essayer</button></div>
+</div></nav>
+
+<header class="wrap hero">
+  <div class="glow"></div>
+  <div>
+    <span class="eyebrow">● Pour commerces, restaurants &amp; équipes</span>
+    <h1>Le planning d'équipe <span class="g">en 10 minutes</span>.</h1>
+    <p>Shifty remplace le tableur et les groupes de messages. Construisez le planning par glisser-déposer, repérez les trous de couverture, et chacun reçoit ses horaires sur le téléphone.</p>
+    <div class="cta"><button class="btn">Créer mon planning</button><button class="btn btn-g">Voir la démo</button></div>
+    <div class="stat">
+      <div><div class="n">−3 h</div><div class="l">par semaine de gestion</div></div>
+      <div><div class="n">0</div><div class="l">trou de couverture</div></div>
+      <div><div class="n">1 clic</div><div class="l">pour publier</div></div>
+    </div>
+  </div>
+  <div class="board">
+    <div class="bh"><div><div class="t">Semaine du 15 juin</div><div class="w">Boutique &amp; réserve</div></div><span class="cov">Couverture 100 %</span></div>
+    <div class="cal">
+      <div class="hd"></div>
+      <div class="hd">Lun<b>15</b></div><div class="hd">Mar<b>16</b></div><div class="hd">Mer<b>17</b></div><div class="hd">Jeu<b>18</b></div><div class="hd">Ven<b>19</b></div>
+      <div class="tl">Matin</div>
+      <div class="cell"><div class="sh s1">Léa<small>08–13</small></div></div>
+      <div class="cell"><div class="sh s2">Marc<small>08–13</small></div></div>
+      <div class="cell"><div class="sh s1">Léa<small>08–13</small></div></div>
+      <div class="cell"><div class="sh s3">Inès<small>08–13</small></div></div>
+      <div class="cell"><div class="sh s2">Marc<small>08–13</small></div></div>
+      <div class="tl">Après-m.</div>
+      <div class="cell"><div class="sh s3">Inès<small>13–18</small></div></div>
+      <div class="cell"><div class="sh s4">Tom<small>13–18</small></div></div>
+      <div class="cell"><div class="sh s2">Marc<small>13–18</small></div></div>
+      <div class="cell"><div class="sh s4">Tom<small>13–18</small></div></div>
+      <div class="cell"><div class="sh s1">Léa<small>13–18</small></div></div>
+      <div class="tl">Soir</div>
+      <div class="cell"><div class="empty"></div></div>
+      <div class="cell"><div class="sh s3">Inès<small>18–21</small></div></div>
+      <div class="cell"><div class="empty"></div></div>
+      <div class="cell"><div class="sh s2">Marc<small>18–21</small></div></div>
+      <div class="cell"><div class="sh s4">Tom<small>18–21</small></div></div>
+    </div>
+    <div class="team"><span><i class="dot" style="background:var(--c1)"></i>Léa</span><span><i class="dot" style="background:var(--c2)"></i>Marc</span><span><i class="dot" style="background:var(--c3)"></i>Inès</span><span><i class="dot" style="background:var(--c4)"></i>Tom</span></div>
+  </div>
+</header>
+
+<section id="feat"><div class="wrap">
+  <h2 class="h2">Le planning, enfin sans prise de tête</h2>
+  <p class="lead">Pensé pour les équipes de terrain : commerces, restaurants, instituts, cafés.</p>
+  <div class="grid">
+    <div class="f"><div class="ic">🧲</div><h3>Glisser-déposer</h3><p>Construisez la semaine en faisant glisser les créneaux. Dupliquez une semaine type en un clic.</p></div>
+    <div class="f"><div class="ic">⚠️</div><h3>Alertes sous-effectif</h3><p>Shifty repère les trous de couverture et les chevauchements avant qu'ils ne deviennent un problème.</p></div>
+    <div class="f"><div class="ic">📲</div><h3>Horaires sur le téléphone</h3><p>Chacun voit son planning et reçoit une notification à chaque changement. Fini les « j'étais pas au courant ».</p></div>
+    <div class="f"><div class="ic">🔄</div><h3>Échange de shifts</h3><p>Un employé propose, un collègue accepte, vous validez. L'échange se fait sans dizaines de messages.</p></div>
+    <div class="f"><div class="ic">⏱️</div><h3>Pointage intégré</h3><p>Arrivées et départs en un tap. Comparez prévu et réalisé, sans ressaisie en fin de mois.</p></div>
+    <div class="f"><div class="ic">📊</div><h3>Heures &amp; coûts</h3><p>Suivez les heures par personne et la masse salariale prévue. Vous décidez avec des chiffres clairs.</p></div>
+  </div>
+
+  <div class="band">
+    <h2>Rendez-vous le dimanche soir… sans le planning.</h2>
+    <p>Essai gratuit de 14 jours. Importez votre équipe en 2 minutes.</p>
+    <button class="btn">Essayer Shifty</button>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="logo" style="justify-content:center;margin-bottom:6px"><span class="mk">S</span>Shifty</div>
+  © 2026 Shifty — Planning d'équipe pour commerces.
+  <div class="fnote">Application de démonstration fictive créée pour un portfolio. Marque, équipe et données inventées.</div>
+</div></footer>
+</body>
+</html>

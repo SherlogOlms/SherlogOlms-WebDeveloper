@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fidélo — La carte de fidélité qui reste dans la poche</title>
+<style>
+  :root{--bg:#fff8f1;--ink:#2a1c12;--muted:#8a7563;--acc:#f59e0b;--acc2:#e11d74;--card:#fff;--line:#f0e3d4;--deep:#3a2a1a}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:40;background:rgba(255,248,241,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px;letter-spacing:-.5px}
+  .mk{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
+  .links{display:flex;gap:30px;color:var(--muted);font-size:15px}
+  .links a:hover{color:var(--ink)}
+  .btn{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;padding:12px 22px;border-radius:100px;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px #e11d7440}
+  .btn-g{background:#fff;border:1px solid var(--line);color:var(--ink)}
+  .hero{display:grid;grid-template-columns:1fr .8fr;gap:36px;align-items:center;padding:70px 0 50px;position:relative}
+  .eyebrow{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);padding:7px 14px;border-radius:100px;font-size:13px;color:var(--acc2);font-weight:700;margin-bottom:22px}
+  h1{font-size:56px;line-height:1.04;letter-spacing:-2px;font-weight:800}
+  h1 .g{background:linear-gradient(120deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--muted);font-size:18px;line-height:1.65;margin:22px 0 30px;max-width:440px}
+  .cta{display:flex;gap:13px;flex-wrap:wrap}
+  .stat{display:flex;gap:34px;margin-top:38px}
+  .stat .n{font-size:26px;font-weight:800}.stat .l{color:var(--muted);font-size:13px}
+  .phonewrap{display:flex;justify-content:center;position:relative}
+  .phone{width:286px;height:580px;background:#241a12;border:11px solid #1a1109;border-radius:42px;box-shadow:0 40px 80px #b86a2030;overflow:hidden;position:relative;animation:floatp 6s ease-in-out infinite}
+  @keyframes floatp{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:118px;height:24px;background:#1a1109;border-radius:0 0 16px 16px;z-index:5}
+  .screen{height:100%;background:linear-gradient(180deg,#fff,#fff2e2);padding:34px 16px 16px}
+  .cardf{border-radius:20px;background:linear-gradient(135deg,#f59e0b,#e11d74);color:#fff;padding:18px;position:relative;overflow:hidden;box-shadow:0 14px 30px #e11d7430}
+  .cardf .shop{font-size:12px;opacity:.85;letter-spacing:1px;text-transform:uppercase}
+  .cardf .who{font-weight:800;font-size:19px;margin-top:2px}
+  .cardf .pts{display:flex;align-items:baseline;gap:6px;margin-top:16px}
+  .cardf .pts b{font-size:34px;font-weight:800}.cardf .pts span{font-size:13px;opacity:.85}
+  .cardf .chip{position:absolute;top:18px;right:18px;width:30px;height:22px;border-radius:5px;background:#ffffff55}
+  .stamps{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin:16px 4px}
+  .stmp{aspect-ratio:1;border-radius:50%;border:2px dashed #e7b27a;display:flex;align-items:center;justify-content:center;font-size:17px;color:#c98a3a}
+  .stmp.on{background:linear-gradient(135deg,#f59e0b,#e11d74);border:none;color:#fff}
+  .reward{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:11px 13px;margin:0 4px}
+  .reward .g{width:36px;height:36px;border-radius:10px;background:#fff2e2;display:flex;align-items:center;justify-content:center;font-size:18px}
+  .reward .t{font-weight:700;font-size:13px}.reward .s{font-size:11px;color:var(--muted)}
+  .reward .go{margin-left:auto;font-size:11px;font-weight:800;color:var(--acc2)}
+  .qr{margin:14px auto 0;width:84px;height:84px;border-radius:12px;background:
+     linear-gradient(#241a12 2px,transparent 0) 0 0/100% 8px,
+     linear-gradient(90deg,#241a12 2px,transparent 0) 0 0/8px 100%,#fff;border:5px solid #241a12}
+  section{padding:74px 0}
+  .h2{text-align:center;font-size:40px;font-weight:800;letter-spacing:-1px}
+  .lead{text-align:center;color:var(--muted);font-size:17px;margin:14px auto 46px;max-width:520px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .f{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:transform .25s,border-color .25s}
+  .f:hover{transform:translateY(-6px);border-color:var(--acc)}
+  .f .ic{width:46px;height:46px;border-radius:12px;background:#fff2e2;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+  .f h3{font-size:18px;margin-bottom:8px}.f p{color:var(--muted);font-size:15px;line-height:1.6}
+  .dash{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;max-width:860px;margin:0 auto;box-shadow:0 20px 50px #c98a3a18}
+  .dash .row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+  .kpi{background:var(--bg);border:1px solid var(--line);border-radius:13px;padding:16px}
+  .kpi .l{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .kpi .v{font-size:26px;font-weight:800;margin-top:5px}.kpi .v small{font-size:13px;color:var(--acc2);font-weight:700}
+  .bars{display:flex;align-items:flex-end;gap:8px;height:90px;padding:8px 4px 0}
+  .bars i{flex:1;background:linear-gradient(180deg,#f59e0b,#e11d74);border-radius:6px 6px 0 0;display:block}
+  .band{margin-top:30px;background:linear-gradient(120deg,#f59e0b,#e11d74);color:#fff;border-radius:24px;padding:54px;text-align:center}
+  .band h2{font-size:36px;font-weight:800;letter-spacing:-1px}.band p{margin:14px 0 24px;opacity:.9}
+  .band .btn{background:#fff;color:var(--acc2)}
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:14px}
+  .fnote{margin-top:8px;font-size:12px;opacity:.7}
+  @media(max-width:880px){.hero{grid-template-columns:1fr}h1{font-size:40px}.links{display:none}.grid,.dash .row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav">
+  <div class="logo"><span class="mk">F</span>Fidélo</div>
+  <div class="links"><a href="#feat">Fonctions</a><a href="#dash">Côté commerçant</a><a href="#">Tarifs</a></div>
+  <div style="display:flex;gap:10px"><button class="btn btn-g">Connexion</button><button class="btn">Essayer</button></div>
+</div></nav>
+
+<header class="wrap hero">
+  <div>
+    <span class="eyebrow">● Pour cafés, boutiques &amp; restaurants</span>
+    <h1>La carte de fidélité <span class="g">qui reste dans la poche</span>.</h1>
+    <p>Fini les cartes en carton perdues. Vos clients cumulent leurs points sur le téléphone, vous les faites revenir avec des récompenses qui donnent envie.</p>
+    <div class="cta"><button class="btn">Lancer mon programme</button><button class="btn btn-g">Voir la démo</button></div>
+    <div class="stat">
+      <div><div class="n">+38 %</div><div class="l">de clients qui reviennent</div></div>
+      <div><div class="n">0</div><div class="l">appli à installer</div></div>
+      <div><div class="n">2 sec</div><div class="l">pour scanner en caisse</div></div>
+    </div>
+  </div>
+  <div class="phonewrap">
+    <div class="phone"><div class="notch"></div><div class="screen">
+      <div class="cardf"><div class="chip"></div><div class="shop">Café du Marché</div><div class="who">Camille R.</div><div class="pts"><b>240</b><span>points · niveau Or</span></div></div>
+      <div class="stamps">
+        <div class="stmp on">☕</div><div class="stmp on">☕</div><div class="stmp on">☕</div><div class="stmp on">☕</div><div class="stmp on">☕</div>
+        <div class="stmp on">☕</div><div class="stmp on">☕</div><div class="stmp">☕</div><div class="stmp">☕</div><div class="stmp">🎁</div>
+      </div>
+      <div class="reward"><span class="g">🎁</span><div><div class="t">Boisson offerte</div><div class="s">Plus que 2 cafés</div></div><span class="go">Bientôt</span></div>
+      <div class="qr"></div>
+      <div style="text-align:center;font-size:11px;color:#a88;margin-top:8px">Montrez ce code en caisse</div>
+    </div></div>
+  </div>
+</header>
+
+<section id="feat"><div class="wrap">
+  <h2 class="h2">Simple pour vous, irrésistible pour eux</h2>
+  <p class="lead">Un programme de fidélité moderne, sans matériel compliqué ni application lourde.</p>
+  <div class="grid">
+    <div class="f"><div class="ic">📲</div><h3>Sans appli à installer</h3><p>La carte s'ajoute au téléphone (Wallet) ou s'ouvre depuis un simple lien. Zéro friction pour le client.</p></div>
+    <div class="f"><div class="ic">⭐</div><h3>Points &amp; récompenses</h3><p>Définissez vos règles : points par achat, paliers, cadeaux. Vos clients voient leur progression en direct.</p></div>
+    <div class="f"><div class="ic">🔳</div><h3>Scan en caisse</h3><p>Un QR à montrer, deux secondes pour valider. Aucune file d'attente, aucune carte oubliée.</p></div>
+    <div class="f"><div class="ic">✉️</div><h3>Relances automatiques</h3><p>« Ça fait longtemps ! » ou « Votre récompense vous attend » : des messages qui ramènent du monde.</p></div>
+    <div class="f"><div class="ic">🎂</div><h3>Offres anniversaire</h3><p>Un petit geste le jour J, envoyé tout seul. C'est ce qui crée l'attachement à votre enseigne.</p></div>
+    <div class="f"><div class="ic">📈</div><h3>Vous gardez vos données</h3><p>Vos clients sont à vous : exportez, segmentez, communiquez quand vous le souhaitez.</p></div>
+  </div>
+</div></section>
+
+<section id="dash" style="background:#fff3e6"><div class="wrap">
+  <h2 class="h2">Un tableau de bord clair côté commerçant</h2>
+  <p class="lead">Vous voyez en un coup d'œil qui revient, ce qui marche et ce qu'il faut relancer.</p>
+  <div class="dash">
+    <div class="row">
+      <div class="kpi"><div class="l">Membres</div><div class="v">1 284 <small>▲ 6 %</small></div></div>
+      <div class="kpi"><div class="l">Scans cette semaine</div><div class="v">372</div></div>
+      <div class="kpi"><div class="l">Récompenses utilisées</div><div class="v">58</div></div>
+    </div>
+    <div class="kpi"><div class="l">Visites par jour</div>
+      <div class="bars"><i style="height:42%"></i><i style="height:58%"></i><i style="height:50%"></i><i style="height:74%"></i><i style="height:66%"></i><i style="height:92%"></i><i style="height:80%"></i></div>
+    </div>
+  </div>
+
+  <div class="band">
+    <h2>Transformez un client de passage en habitué.</h2>
+    <p>Programme prêt en 10 minutes. Premier mois offert.</p>
+    <button class="btn">Créer mon programme Fidélo</button>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="logo" style="justify-content:center;margin-bottom:6px"><span class="mk">F</span>Fidélo</div>
+  © 2026 Fidélo — Fidélité digitale pour commerces.
+  <div class="fnote">Application de démonstration fictive créée pour un portfolio. Marque, chiffres et clients inventés.</div>
+</div></footer>
+</body>
+</html>

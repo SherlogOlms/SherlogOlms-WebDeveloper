@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stockly — Votre stock sous contrôle, sans tableur</title>
+<style>
+  :root{--bg:#0a0f1c;--bg2:#0e1526;--ink:#eaf0ff;--muted:#90a0bd;--acc:#3b82f6;--acc2:#22c55e;--warn:#f59e0b;--danger:#ef4444;--card:#111a2e;--line:#1f2c45}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:40;background:rgba(10,15,28,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;letter-spacing:-.5px}
+  .mk{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:flex;align-items:center;justify-content:center;color:#06131f;font-weight:900}
+  .links{display:flex;gap:30px;color:var(--muted);font-size:15px}
+  .links a:hover{color:var(--ink)}
+  .btn{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#06131f;padding:11px 20px;border-radius:10px;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px #3b82f650}
+  .btn-g{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  .hero{padding:80px 0 40px;text-align:center;position:relative}
+  .glow{position:absolute;top:-110px;left:50%;transform:translateX(-50%);width:720px;height:480px;background:radial-gradient(circle,#3b82f635,transparent 62%);filter:blur(46px);z-index:-1}
+  .eyebrow{display:inline-flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);padding:7px 14px;border-radius:100px;font-size:13px;color:var(--acc2);font-weight:600;margin-bottom:24px}
+  h1{font-size:60px;line-height:1.05;letter-spacing:-2px;font-weight:800;max-width:800px;margin:0 auto}
+  h1 .g{background:linear-gradient(120deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .sub{color:var(--muted);font-size:18px;max-width:540px;margin:22px auto 32px;line-height:1.6}
+  .cta{display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+  .dash{margin:64px auto 0;max-width:1000px;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 40px 100px #00000070;animation:float 6s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  .dbar{display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid var(--line)}
+  .dbar i{width:11px;height:11px;border-radius:50%}
+  .dbody{display:grid;grid-template-columns:190px 1fr;min-height:392px;text-align:left}
+  .side{border-right:1px solid var(--line);padding:16px 12px;display:flex;flex-direction:column;gap:5px}
+  .si{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:9px;color:var(--muted);font-size:14px}
+  .si.on{background:#3b82f622;color:var(--ink)}
+  .si span{width:15px;height:15px;border-radius:4px;background:var(--line)}
+  .si.on span{background:linear-gradient(135deg,var(--acc),var(--acc2))}
+  .main{padding:20px}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+  .kpi{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px}
+  .kpi .l{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+  .kpi .v{font-size:22px;font-weight:800;margin-top:5px}
+  .kpi .v.w{color:var(--warn)}.kpi .v.d{color:var(--danger)}
+  .tbl{background:var(--bg);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .tr{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line);font-size:13px;align-items:center}
+  .tr:last-child{border-bottom:none}
+  .tr.head{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.5px;background:#0c1426}
+  .pill{justify-self:start;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px}
+  .pill.ok{background:#22c55e22;color:#4ade80}
+  .pill.low{background:#f59e0b22;color:#fbbf24}
+  .pill.out{background:#ef444422;color:#f87171}
+  .barwrap{height:7px;border-radius:6px;background:#1c2740;overflow:hidden}
+  .barwrap i{display:block;height:100%;border-radius:6px}
+  section{padding:78px 0}
+  .h2{text-align:center;font-size:40px;font-weight:800;letter-spacing:-1px}
+  .lead{text-align:center;color:var(--muted);font-size:17px;margin:14px auto 46px;max-width:520px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .f{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:transform .25s,border-color .25s}
+  .f:hover{transform:translateY(-6px);border-color:var(--acc)}
+  .f .ic{width:46px;height:46px;border-radius:12px;background:#3b82f61f;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+  .f h3{font-size:18px;margin-bottom:8px}.f p{color:var(--muted);font-size:15px;line-height:1.6}
+  .band{margin-top:30px;background:linear-gradient(120deg,var(--acc),var(--acc2));color:#06131f;border-radius:24px;padding:54px;text-align:center}
+  .band h2{font-size:36px;font-weight:800;letter-spacing:-1px}.band p{margin:14px 0 24px;font-weight:500;opacity:.85}
+  .band .btn{background:#06131f;color:var(--acc2)}
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:14px}
+  .fnote{margin-top:8px;font-size:12px;opacity:.65}
+  @media(max-width:880px){h1{font-size:40px}.links{display:none}.grid{grid-template-columns:1fr}.dbody{grid-template-columns:1fr}.side{display:none}.kpis{grid-template-columns:1fr 1fr}.tr{grid-template-columns:1.4fr 1fr 1fr}.tr .hidem{display:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav">
+  <div class="logo"><span class="mk">S</span>Stockly</div>
+  <div class="links"><a href="#feat">Fonctions</a><a href="#">Tarifs</a><a href="#">Intégrations</a></div>
+  <div style="display:flex;gap:10px"><button class="btn btn-g">Se connecter</button><button class="btn">Essai gratuit</button></div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="glow"></div>
+  <span class="eyebrow">● Pour commerces, restaurants &amp; ateliers</span>
+  <h1>Votre stock sous contrôle, <span class="g">sans tableur</span>.</h1>
+  <p class="sub">Stockly suit vos quantités en temps réel, vous alerte avant la rupture et prépare vos commandes fournisseurs. Fini les surprises en pleine journée.</p>
+  <div class="cta"><button class="btn">Démarrer gratuitement</button><button class="btn btn-g">Voir la démo →</button></div>
+
+  <div class="dash">
+    <div class="dbar"><i style="background:#ef4444"></i><i style="background:#f59e0b"></i><i style="background:#22c55e"></i>
+      <span style="margin-left:12px;color:var(--muted);font-size:13px">stockly.app · Épicerie du Coin</span></div>
+    <div class="dbody">
+      <div class="side">
+        <div class="si on"><span></span>Vue d'ensemble</div>
+        <div class="si"><span></span>Articles</div>
+        <div class="si"><span></span>Mouvements</div>
+        <div class="si"><span></span>Commandes</div>
+        <div class="si"><span></span>Fournisseurs</div>
+        <div class="si"><span></span>Rapports</div>
+      </div>
+      <div class="main">
+        <div class="kpis">
+          <div class="kpi"><div class="l">Références</div><div class="v">432</div></div>
+          <div class="kpi"><div class="l">Valeur du stock</div><div class="v">18 740 €</div></div>
+          <div class="kpi"><div class="l">Stock bas</div><div class="v w">7</div></div>
+          <div class="kpi"><div class="l">En rupture</div><div class="v d">2</div></div>
+        </div>
+        <div class="tbl">
+          <div class="tr head"><span>Article</span><span>Stock</span><span class="hidem">Niveau</span><span>État</span></div>
+          <div class="tr"><span>Café grains 1 kg</span><span>34</span><span class="hidem barwrap"><i style="width:78%;background:#22c55e"></i></span><span class="pill ok">OK</span></div>
+          <div class="tr"><span>Lait d'avoine</span><span>9</span><span class="hidem barwrap"><i style="width:22%;background:#f59e0b"></i></span><span class="pill low">Stock bas</span></div>
+          <div class="tr"><span>Gobelets 25 cl</span><span>0</span><span class="hidem barwrap"><i style="width:4%;background:#ef4444"></i></span><span class="pill out">Rupture</span></div>
+          <div class="tr"><span>Sirop vanille</span><span>21</span><span class="hidem barwrap"><i style="width:60%;background:#22c55e"></i></span><span class="pill ok">OK</span></div>
+          <div class="tr"><span>Sachets kraft</span><span>12</span><span class="hidem barwrap"><i style="width:30%;background:#f59e0b"></i></span><span class="pill low">Stock bas</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></header>
+
+<section id="feat"><div class="wrap">
+  <h2 class="h2">Le stock, sans la charge mentale</h2>
+  <p class="lead">Pensé pour les commerces qui n'ont pas le temps de tenir un inventaire à la main.</p>
+  <div class="grid">
+    <div class="f"><div class="ic">🔴</div><h3>Alertes de rupture</h3><p>Un seuil par article, et Stockly vous prévient avant de tomber à zéro. Vous commandez au bon moment.</p></div>
+    <div class="f"><div class="ic">🔄</div><h3>Mouvements de stock</h3><p>Entrées, sorties, pertes, retours : chaque variation est tracée. Vous savez toujours où vous en êtes.</p></div>
+    <div class="f"><div class="ic">📦</div><h3>Commandes fournisseurs</h3><p>Stockly prépare un bon de commande à partir des articles bas. Un clic, c'est envoyé.</p></div>
+    <div class="f"><div class="ic">🏬</div><h3>Multi-dépôt</h3><p>Plusieurs points de vente ou une réserve ? Suivez chaque emplacement séparément.</p></div>
+    <div class="f"><div class="ic">📱</div><h3>Scan code-barres</h3><p>Réceptionnez et inventoriez au téléphone, en scannant. Plus vite, sans erreur de saisie.</p></div>
+    <div class="f"><div class="ic">📊</div><h3>Rapports utiles</h3><p>Rotation, valeur immobilisée, articles dormants : décidez avec des chiffres clairs.</p></div>
+  </div>
+
+  <div class="band">
+    <h2>Ne tombez plus jamais en rupture.</h2>
+    <p>Essai gratuit de 14 jours. Importez votre stock en quelques minutes.</p>
+    <button class="btn">Essayer Stockly</button>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="logo" style="justify-content:center;margin-bottom:6px"><span class="mk">S</span>Stockly</div>
+  © 2026 Stockly — Gestion de stock pour commerces.
+  <div class="fnote">Application de démonstration fictive créée pour un portfolio. Marque, chiffres et données inventés.</div>
+</div></footer>
+</body>
+</html>

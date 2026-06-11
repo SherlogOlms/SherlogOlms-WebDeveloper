@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planéo — La prise de rendez-vous sans le casse-tête</title>
+<style>
+  :root{--bg:#0e1022;--bg2:#141733;--ink:#eef0ff;--muted:#9aa0c8;--acc:#7c6cff;--acc2:#2dd4bf;--card:#171a38;--line:#262a52}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  nav{position:sticky;top:0;z-index:40;background:rgba(14,16,34,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:21px;letter-spacing:-.5px}
+  .mk{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--acc),var(--acc2));display:flex;align-items:center;justify-content:center;color:#0e1022;font-weight:900}
+  .links{display:flex;gap:30px;color:var(--muted);font-size:15px}
+  .links a:hover{color:var(--ink)}
+  .btn{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#0e1022;padding:12px 22px;border-radius:100px;font-weight:700;font-size:14px;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px #7c6cff45}
+  .btn-g{background:transparent;border:1px solid var(--line);color:var(--ink)}
+  .hero{display:grid;grid-template-columns:1fr .82fr;gap:36px;align-items:center;padding:70px 0 50px;position:relative}
+  .glow{position:absolute;top:-90px;left:-60px;width:560px;height:520px;background:radial-gradient(circle,#7c6cff30,transparent 60%);filter:blur(54px);z-index:-1}
+  .eyebrow{display:inline-flex;gap:8px;align-items:center;background:var(--card);border:1px solid var(--line);padding:7px 14px;border-radius:100px;font-size:13px;color:var(--acc2);font-weight:600;margin-bottom:22px}
+  h1{font-size:56px;line-height:1.05;letter-spacing:-2px;font-weight:800}
+  h1 .g{background:linear-gradient(120deg,var(--acc2),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--muted);font-size:18px;line-height:1.65;margin:22px 0 30px;max-width:440px}
+  .cta{display:flex;gap:13px;flex-wrap:wrap}
+  .stat{display:flex;gap:34px;margin-top:38px}
+  .stat .n{font-size:26px;font-weight:800}.stat .l{color:var(--muted);font-size:13px}
+  .phonewrap{display:flex;justify-content:center}
+  .phone{width:288px;height:588px;background:#0a0c1c;border:11px solid #05060f;border-radius:42px;box-shadow:0 40px 90px #00000090;overflow:hidden;position:relative;animation:floatp 6s ease-in-out infinite}
+  @keyframes floatp{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  .notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:24px;background:#05060f;border-radius:0 0 16px 16px;z-index:5}
+  .screen{height:100%;background:linear-gradient(180deg,#141733,#0e1022);padding:34px 15px 16px;overflow:hidden}
+  .ph-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .ph-h .d{font-size:12px;color:var(--muted)}.ph-h .t{font-weight:800;font-size:18px}
+  .ph-h .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--acc2))}
+  .week{display:flex;gap:6px;margin:14px 0}
+  .day{flex:1;text-align:center;padding:8px 0;border-radius:11px;background:#10132c;border:1px solid var(--line);font-size:11px;color:var(--muted)}
+  .day b{display:block;font-size:15px;color:var(--ink);margin-top:3px}
+  .day.on{background:linear-gradient(135deg,var(--acc),var(--acc2));border-color:transparent;color:#0e1022}
+  .day.on b{color:#0e1022}
+  .lab{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:10px 2px 8px}
+  .appt{display:flex;align-items:center;gap:10px;background:#10132c;border:1px solid var(--line);border-radius:13px;padding:10px 12px;margin-bottom:8px;position:relative;overflow:hidden}
+  .appt::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--acc2)}
+  .appt.v::before{background:var(--acc)}
+  .appt .tm{font-weight:800;font-size:13px;width:42px}
+  .appt .nm{font-weight:700;font-size:13px}.appt .sv{font-size:11px;color:var(--muted)}
+  .appt .free{margin-left:auto;font-size:11px;color:var(--acc2);font-weight:700}
+  .pulse{width:8px;height:8px;border-radius:50%;background:var(--acc2);box-shadow:0 0 0 0 #2dd4bf;animation:pl 2s infinite;margin-left:auto}
+  @keyframes pl{0%{box-shadow:0 0 0 0 #2dd4bf80}70%{box-shadow:0 0 0 9px #2dd4bf00}100%{box-shadow:0 0 0 0 #2dd4bf00}}
+  section{padding:74px 0}
+  .h2{text-align:center;font-size:40px;font-weight:800;letter-spacing:-1px}
+  .lead{text-align:center;color:var(--muted);font-size:17px;margin:14px auto 46px;max-width:520px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .f{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;transition:transform .25s,border-color .25s}
+  .f:hover{transform:translateY(-6px);border-color:var(--acc)}
+  .f .ic{width:46px;height:46px;border-radius:12px;background:#7c6cff1f;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+  .f h3{font-size:18px;margin-bottom:8px}.f p{color:var(--muted);font-size:15px;line-height:1.6}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;position:relative}
+  .step::before{counter-increment:s;content:counter(s);position:absolute;top:-14px;left:22px;width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--acc),var(--acc2));color:#0e1022;font-weight:900;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:17px;margin:8px 0}.step p{color:var(--muted);font-size:14px;line-height:1.6}
+  .band{margin-top:30px;background:linear-gradient(120deg,var(--acc),var(--acc2));color:#0e1022;border-radius:24px;padding:54px;text-align:center}
+  .band h2{font-size:36px;font-weight:800;letter-spacing:-1px}.band p{margin:14px 0 24px;font-weight:500;opacity:.85}
+  .band .btn{background:#0e1022;color:var(--acc2)}
+  footer{border-top:1px solid var(--line);padding:36px 0;text-align:center;color:var(--muted);font-size:14px}
+  .fnote{margin-top:8px;font-size:12px;opacity:.65}
+  @media(max-width:880px){.hero{grid-template-columns:1fr}h1{font-size:40px}.links{display:none}.grid,.steps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav><div class="wrap nav">
+  <div class="logo"><span class="mk">P</span>Planéo</div>
+  <div class="links"><a href="#feat">Fonctions</a><a href="#how">Comment ça marche</a><a href="#">Tarifs</a></div>
+  <div style="display:flex;gap:10px"><button class="btn btn-g">Connexion</button><button class="btn">Essai gratuit</button></div>
+</div></nav>
+
+<header class="wrap hero">
+  <div class="glow"></div>
+  <div>
+    <span class="eyebrow">● Pour salons, instituts &amp; indépendants</span>
+    <h1>Vos rendez-vous, <span class="g">sans le casse-tête</span>.</h1>
+    <p>Planéo gère votre agenda, envoie les rappels et réduit les oublis. Vos clients réservent en ligne, vous gardez le contrôle de votre journée.</p>
+    <div class="cta"><button class="btn">Démarrer gratuitement</button><button class="btn btn-g">Voir une démo</button></div>
+    <div class="stat">
+      <div><div class="n">−62 %</div><div class="l">de rendez-vous oubliés</div></div>
+      <div><div class="n">24/7</div><div class="l">réservation en ligne</div></div>
+      <div><div class="n">3 min</div><div class="l">pour tout configurer</div></div>
+    </div>
+  </div>
+  <div class="phonewrap">
+    <div class="phone"><div class="notch"></div><div class="screen">
+      <div class="ph-h"><div><div class="d">Mardi 16 juin</div><div class="t">Aujourd'hui</div></div><div class="av"></div></div>
+      <div class="week">
+        <div class="day">L<b>15</b></div>
+        <div class="day on">M<b>16</b></div>
+        <div class="day">M<b>17</b></div>
+        <div class="day">J<b>18</b></div>
+        <div class="day">V<b>19</b></div>
+      </div>
+      <div class="lab">Matin</div>
+      <div class="appt"><span class="tm">09:00</span><div><div class="nm">Camille R.</div><div class="sv">Coupe + brushing</div></div><span class="pulse"></span></div>
+      <div class="appt v"><span class="tm">10:30</span><div><div class="nm">Sofia M.</div><div class="sv">Coloration</div></div></div>
+      <div class="appt"><span class="tm">11:15</span><div><div class="nm">Libre</div><div class="sv">45 min disponibles</div></div><span class="free">Réservable</span></div>
+      <div class="lab">Après-midi</div>
+      <div class="appt v"><span class="tm">14:00</span><div><div class="nm">Léa T.</div><div class="sv">Soin + coupe</div></div></div>
+      <div class="appt"><span class="tm">15:30</span><div><div class="nm">Noah B.</div><div class="sv">Barbe</div></div></div>
+    </div></div>
+  </div>
+</header>
+
+<section id="feat"><div class="wrap">
+  <h2 class="h2">Tout ce qu'il faut, rien de superflu</h2>
+  <p class="lead">Conçu pour les pros du rendez-vous : salons de coiffure, instituts, esthéticiennes, thérapeutes.</p>
+  <div class="grid">
+    <div class="f"><div class="ic">📅</div><h3>Agenda en ligne</h3><p>Vos clients réservent un créneau libre depuis leur téléphone, à toute heure. Plus de téléphone qui sonne pendant un soin.</p></div>
+    <div class="f"><div class="ic">🔔</div><h3>Rappels automatiques</h3><p>SMS et e-mails de rappel envoyés tout seuls. Le no-show fond, votre planning reste plein.</p></div>
+    <div class="f"><div class="ic">🧾</div><h3>Fiche client</h3><p>Historique, préférences, formules et notes : vous retrouvez tout en un coup d'œil avant chaque visite.</p></div>
+    <div class="f"><div class="ic">💳</div><h3>Acompte en ligne</h3><p>Demandez un acompte à la réservation pour sécuriser les créneaux importants.</p></div>
+    <div class="f"><div class="ic">🕒</div><h3>Horaires sur-mesure</h3><p>Pauses, jours off, durées par prestation : votre agenda colle exactement à votre réalité.</p></div>
+    <div class="f"><div class="ic">📊</div><h3>Statistiques claires</h3><p>Taux de remplissage, prestations phares, nouveaux clients : pilotez votre activité simplement.</p></div>
+  </div>
+</div></section>
+
+<section id="how" style="background:var(--bg2)"><div class="wrap">
+  <h2 class="h2">Opérationnel en 3 étapes</h2>
+  <p class="lead">Pas d'installation compliquée. Vous êtes prêt le jour même.</p>
+  <div class="steps">
+    <div class="step"><h3>Créez vos prestations</h3><p>Ajoutez vos services, leurs durées et leurs prix. Définissez vos horaires.</p></div>
+    <div class="step"><h3>Partagez votre lien</h3><p>Sur Instagram, votre site ou votre vitrine : vos clients réservent en deux clics.</p></div>
+    <div class="step"><h3>Laissez Planéo gérer</h3><p>Rappels, confirmations et agenda se synchronisent. Vous n'avez plus qu'à les recevoir.</p></div>
+  </div>
+
+  <div class="band">
+    <h2>Reprenez la main sur votre planning.</h2>
+    <p>Essai gratuit de 14 jours. Sans carte bancaire.</p>
+    <button class="btn">Créer mon agenda Planéo</button>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="logo" style="justify-content:center;margin-bottom:6px"><span class="mk">P</span>Planéo</div>
+  © 2026 Planéo — Prise de rendez-vous pour les pros.
+  <div class="fnote">Application de démonstration fictive créée pour un portfolio. Marque, chiffres et clients inventés.</div>
+</div></footer>
+</body>
+</html>
