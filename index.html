@@ -196,4 +196,6 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     const rev=document.querySelectorAll('.reveal');
     if('IntersectionObserver' in window){const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vu');o.unobserve(e.target);}}),{threshold:.12});rev.forEach(el=>o.observe(el));}else rev.forEach(el=>el.classList.add('vu'));
   </script>
-  <script src="i
+  <script src="i18n.js"></script>
+</body>
+</html>
