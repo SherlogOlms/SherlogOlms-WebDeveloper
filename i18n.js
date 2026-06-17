@@ -282,8 +282,17 @@
     }
     window.__setLang = setLang;
 
-    var saved = "fr"; try { saved = localStorage.getItem("portfolio_lang") || "fr"; } catch (e) {}
-    setLang(saved);
+    function detectLang() {
+      try { var s = localStorage.getItem("portfolio_lang"); if (s) return s; } catch (e) {}
+      var supported = ["fr", "en", "de", "it", "nl"];
+      var navs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || navigator.userLanguage || "fr"];
+      for (var i = 0; i < navs.length; i++) {
+        var code = (navs[i] || "").slice(0, 2).toLowerCase();
+        if (supported.indexOf(code) !== -1) return code;
+      }
+      return "fr";
+    }
+    setLang(detectLang());
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
