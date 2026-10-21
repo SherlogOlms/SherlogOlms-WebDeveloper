@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sites web — Réalisations | Sherlog Olms</title>
   <meta name="description" content="Sites web réalisés par Sherlog Olms à Sion : restaurants, salons de coiffure, instituts de beauté, bars et photographie.">
-  <meta name="theme-color" content="#0B0F17">
+  <meta name="theme-color" content="#04050D">
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <style>
 :root{--bg:#0B0F17;--bg2:#0F1521;--surface:#141B27;--surface2:#1A2331;--txt:#E7ECF3;--muted:#9AA7BC;--bord:#243043;--acc:#5B8DEF;--grad:linear-gradient(135deg,#5B8DEF,#7C5CFC);--rayon:16px}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -70,13 +70,15 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
 @media (max-width:860px){.projs{grid-template-columns:1fr}.liens{position:fixed;inset:62px 0 auto 0;flex-direction:column;background:var(--bg2);border-bottom:1px solid var(--bord);padding:18px;gap:18px;display:none}.liens.ouvert{display:flex}.burger{display:flex}}
 @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}html{scroll-behavior:auto}}
   </style>
+  <link rel="stylesheet" href="/assets/neo.css">
 </head>
 <body>
+  <canvas id="bg" aria-hidden="true"></canvas><div class="glow" aria-hidden="true"></div><div class="progress" aria-hidden="true"></div>
   <header><div class="nav">
-    <a href="/" class="logo"><img src="/favicon.png" width="34" height="34" alt="Sherlog Olms" style="display:block;flex:none"> Sherlog Olms</a>
+    <a href="/" class="logo"><span class="mk"><img src="/favicon.png" width="34" height="34" alt=""></span> Sherlog Olms</a>
     <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     <nav class="liens" id="liens">
-      <a href="/#services">Services</a><a href="/#projets">Projets</a><a href="/#about">À propos</a>
+      <a href="/#services">Services</a><a href="/#methode">Méthode</a><a href="/#projets">Projets</a>
       <a href="/#contact" class="btn btn-p" style="padding:9px 18px">Devis gratuit</a>
     </nav>
   </div></header>
@@ -127,7 +129,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
   </div></section>
 
   <footer><div class="wrap">
-    <div class="logo"><img src="/favicon.png" width="34" height="34" alt="Sherlog Olms" style="display:block;flex:none"> Sherlog Olms</div>
+    <div class="logo"><span class="mk"><img src="/favicon.png" width="34" height="34" alt=""></span> Sherlog Olms</div>
     <span>© <span id="annee"></span> · Développeur web · Sion, Valais · contact@sherlogolms.ch</span>
   </div></footer>
 
@@ -139,6 +141,7 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-
     const rev=document.querySelectorAll('.reveal');
     if('IntersectionObserver' in window){const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vu');o.unobserve(e.target);}}),{threshold:.12});rev.forEach(el=>o.observe(el));}else rev.forEach(el=>el.classList.add('vu'));
   </script>
+  <script src="/assets/neo.js"></script>
   <script src="/i18n.js"></script>
 </body>
 </html>
