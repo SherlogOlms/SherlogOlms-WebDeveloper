@@ -85,7 +85,7 @@
     "Toutes les applications": { en: "All applications", de: "Alle Apps", it: "Tutte le applicazioni", nl: "Alle applicaties" },
     "// prochaine étape": { en: "// next step", de: "// nächster Schritt", it: "// prossimo passo", nl: "// volgende stap" },
     "Votre projet,": { en: "Your project,", de: "Ihr Projekt,", it: "Il tuo progetto,", nl: "Je project," },
-    "en ligne dans 10 jours.": { en: "online in 10 days.", de: "in 10 Tagen online.", it: "online in 10 giorni.", nl: "online in 10 dagen." },
+    "en ligne dans 10 jours.": { en: "online in 10\u00a0days.", de: "in 10\u00a0Tagen online.", it: "online in 10\u00a0giorni.", nl: "online in 10\u00a0dagen." },
     "Décrivez votre activité en quelques lignes. Je vous réponds sous 24 h avec une proposition claire et un devis gratuit.": { en: "Describe your business in a few lines. I'll reply within 24 h with a clear proposal and a free quote.", de: "Beschreiben Sie Ihr Geschäft in ein paar Zeilen. Ich antworte innert 24 h mit einem klaren Vorschlag und einem kostenlosen Angebot.", it: "Descrivi la tua attività in poche righe. Ti rispondo entro 24 h con una proposta chiara e un preventivo gratuito.", nl: "Beschrijf je zaak in een paar regels. Ik antwoord binnen 24 u met een duidelijk voorstel en een gratis offerte." },
     "Écrire un e-mail": { en: "Send an email", de: "E-Mail schreiben", it: "Scrivi un'e-mail", nl: "Stuur een e-mail" },
     "Sherlog Olms, développeur web à Sion (Valais)": { en: "Sherlog Olms, web developer in Sion (Valais)", de: "Sherlog Olms, Webentwickler in Sitten (Wallis)", it: "Sherlog Olms, sviluppatore web a Sion (Vallese)", nl: "Sherlog Olms, webontwikkelaar in Sion (Wallis)" },
