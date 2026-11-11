@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Sherlog Olms — Création de sites web et d'applications à Sion, propulsée par l'IA</title>
   <meta name="description" content="Développeur web à Sion (Valais). Création de sites web, d'applications sur-mesure et d'outils intégrant l'intelligence artificielle. Réponse sous 24 h, devis gratuit.">
   <meta name="theme-color" content="#04050D">
@@ -280,6 +280,12 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
   .d-st{min-width:0}
 }
 
+/* ---------- tablettes et écran intérieur des pliables : moins de vide ---------- */
+@media (max-width:920px){
+  section{padding-block:76px}
+  .hero{padding-block:48px 80px}
+  .cta{padding-block:96px}
+}
 /* ---------- mobile : tout recentré et resserré ---------- */
 @media (max-width:620px){
   section{padding-block:72px}
@@ -318,6 +324,30 @@ footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:1
   .cta h2{font-size:clamp(32px,10vw,44px)}
   .cta p{font-size:16px}
   footer .wrap{flex-direction:column;text-align:center;gap:10px}
+}
+
+/* ---------- écrans larges mais peu hauts (iPhone pliable fermé ≈ 466 pt) ---------- */
+@media (max-width:620px) and (min-width:430px){
+  .nav{padding-block:10px}
+  .hero{padding-block:22px 52px}
+  .chip{margin-bottom:16px}
+  .lead{max-width:430px;margin-block:14px 22px}
+  .hero-btns{flex-direction:row;flex-wrap:wrap;justify-content:center;max-width:none}
+  .hero-btns .btn{padding:13px 20px}
+  .trust{margin-top:20px}
+  .hero-grid{gap:44px}
+  section{padding-block:48px}
+  .cta{padding-block:64px}
+  .pj .shot{height:236px}
+  .more{flex-direction:row;flex-wrap:wrap;justify-content:center;max-width:none}
+}
+
+/* ---------- bord à bord : la page passe sous le dock latéral / l'encoche (iPhone Duo, etc.) ---------- */
+html,body{background:var(--void,var(--bg))}
+header{padding-top:env(safe-area-inset-top,0px)}
+footer{padding-bottom:calc(30px + env(safe-area-inset-bottom,0px))}
+@media (max-width:920px){
+  .liens{top:calc(64px + env(safe-area-inset-top,0px));padding-left:max(20px,env(safe-area-inset-left,0px))!important;padding-right:max(20px,env(safe-area-inset-right,0px))!important}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}

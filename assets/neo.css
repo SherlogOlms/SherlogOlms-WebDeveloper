@@ -37,3 +37,12 @@ header{background:rgba(4,5,13,.55);backdrop-filter:blur(14px);-webkit-backdrop-f
 .badge-demo{font-family:'JetBrains Mono',ui-monospace,monospace;background:rgba(4,5,13,.7);border-color:rgba(255,79,216,.5);color:#FFC2F1}
 @media (max-width:860px){.liens{background:rgba(6,7,18,.97)}.glow{display:none}}
 @media (prefers-reduced-motion:reduce){.btn-p,.page-head h1,.logo .mk::after{animation:none}}
+
+/* Bord à bord : la page passe sous le dock latéral / l'encoche, le contenu reste dans la zone sûre.
+   Marges gauche et droite séparées (elles diffèrent sur l'iPhone Duo). */
+.wrap,.nav{padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+header{padding-top:env(safe-area-inset-top,0px)}
+footer{padding-bottom:calc(30px + env(safe-area-inset-bottom,0px))}
+@media (max-width:860px){
+  .liens{top:calc(62px + env(safe-area-inset-top,0px));padding-left:max(22px,env(safe-area-inset-left,0px));padding-right:max(22px,env(safe-area-inset-right,0px))}
+}
